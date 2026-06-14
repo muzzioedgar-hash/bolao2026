@@ -235,20 +235,12 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
 <!-- RESULTADOS -->
 <div class="tab-content" id="tab-resultados">
   <div class="result-info">
-    <strong>Registre os placares reais.</strong> Salvo no seu navegador. O Ranking é calculado automaticamente com base nesses resultados.
+    📊 Resultados carregados automaticamente da planilha oficial. Atualiza a cada vez que você abre esta aba.<br><br>
+    <strong>Pontuação por jogo:</strong> Placar exato <strong style="color:var(--gold)">10pts</strong> · Gols vencedor/perdedor/saldo <strong style="color:var(--gold)">7pts</strong> · Só vencedor <strong style="color:var(--gold)">5pts</strong>
   </div>
-  <div class="scoring-rules">
-    <div class="rule-pill"><span class="rule-pts">10</span><span class="rule-label">Placar exato</span></div>
-    <div class="rule-pill"><span class="rule-pts">7</span><span class="rule-label">Gols do vencedor</span></div>
-    <div class="rule-pill"><span class="rule-pts">7</span><span class="rule-label">Empate correto</span></div>
-    <div class="rule-pill"><span class="rule-pts">7</span><span class="rule-label">Saldo de gols</span></div>
-    <div class="rule-pill"><span class="rule-pts">7</span><span class="rule-label">Gols do perdedor</span></div>
-    <div class="rule-pill"><span class="rule-pts">5</span><span class="rule-label">Vencedor correto</span></div>
-    <div class="rule-pill"><span class="rule-pts">100</span><span class="rule-label">Campeão correto</span></div>
-  </div>
-  <button class="save-btn" onclick="saveResults()">💾 Salvar Resultados</button>
-  <span class="save-feedback" id="saveFeedback">✓ Salvo com sucesso!</span>
-  <div id="resultTable"></div>
+  <button class="save-btn" onclick="fetchAndRender()">🔄 Atualizar Resultados</button>
+  <span class="save-feedback" id="saveFeedback"></span>
+  <div id="resultTable"><div class="no-results">Carregando resultados...</div></div>
 </div>
 
 <!-- RANKING -->
@@ -291,7 +283,50 @@ let expandedCard=null;
 let activeScorePill=null;
 let activeBarSeg=null; // {cardId, seg: 'win1'|'draw'|'win2'}
 
-let results=JSON.parse(localStorage.getItem('bolao2026_results')||'{}');
+const SHEETS_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQj5p44wM4Gv3obXkUtSDrGn4UMgE22yj0dpdY6WfJTqG3ePG0gQWv4y-ufGfUAXeFbVmu2Yg89egsK/pub?gid=0&single=true&output=csv';
+
+// results dict: key = "time1||time2", value = {g1, g2}
+let results={};
+
+async function fetchResults(){
+  try{
+    const resp=await fetch(SHEETS_URL+'&cachebust='+Date.now());
+    const text=await resp.text();
+    const lines=text.trim().split('\n').slice(1); // skip header
+    const newResults={};
+    lines.forEach((line,i)=>{
+      const cols=line.split(',');
+      const t1=(cols[0]||'').trim();
+      const g1=(cols[1]||'').trim();
+      const g2=(cols[2]||'').trim();
+      if(t1&&g1!==''&&g2!==''){
+        // match by row index to avoid name encoding issues
+        const m=matches[i];
+        if(m) newResults[m.t1+'||'+m.t2]={g1,g2};
+      }
+    });
+    results=newResults;
+    return true;
+  }catch(e){
+    console.error('Sheets fetch error:',e);
+    return false;
+  }
+}
+
+async function fetchAndRender(){
+  const fb=document.getElementById('saveFeedback');
+  fb.textContent='⏳ Buscando...';fb.style.opacity='1';
+  const ok=await fetchResults();
+  if(ok){
+    fb.textContent='✓ Atualizado!';
+    setTimeout(()=>fb.style.opacity='0',2500);
+  } else {
+    fb.textContent='⚠️ Erro ao buscar. Tente novamente.';
+  }
+  renderResults();
+  // also refresh rank if it's open
+  if(document.getElementById('tab-rank').classList.contains('active')) renderRank();
+}
 
 /* ── TAB SWITCH ── */
 function showTab(name,btn){
@@ -301,8 +336,8 @@ function showTab(name,btn){
   if(btn) btn.classList.add('active');
   if(name==='jogos') renderMatches();
   if(name==='campeao') renderChamps();
-  if(name==='resultados') renderResults();
-  if(name==='rank') renderRank();
+  if(name==='resultados') fetchAndRender();
+  if(name==='rank') fetchResults().then(()=>renderRank());
   if(name==='stats') renderStats();
   if(name==='pessoa') renderPersons();
 }
@@ -528,46 +563,29 @@ function renderChamps(){
 /* ── RESULTADOS ── */
 function renderResults(){
   const el=document.getElementById('resultTable');
-  let html='<table class="result-table"><thead><tr><th>#</th><th>Grupo</th><th>Time 1</th><th>Placar Real</th><th>Time 2</th><th>Status</th></tr></thead><tbody>';
+  const doneCount=matches.filter(m=>{const r=results[m.t1+'||'+m.t2];return r&&r.g1!==''&&r.g2!=='';}).length;
+  let html=`<div style="font-size:13px;color:var(--text2);margin-bottom:14px">${doneCount} de 72 jogos com resultado registrado</div>`;
+  html+='<table class="result-table"><thead><tr><th>#</th><th>Grupo</th><th>Time 1</th><th>Placar</th><th>Time 2</th><th>Status</th></tr></thead><tbody>';
   matches.forEach((m,i)=>{
     const key=m.t1+'||'+m.t2;
-    const saved=results[key]||{g1:'',g2:''};
-    const isDone=saved.g1!==''&&saved.g2!=='';
+    const r=results[key];
+    const isDone=r&&r.g1!==''&&r.g2!=='';
+    const placar=isDone
+      ? `<span style="font-size:18px;font-weight:700;font-family:'Bebas Neue',sans-serif;color:var(--gold)">${r.g1} × ${r.g2}</span>`
+      : `<span style="color:var(--muted)">–</span>`;
     html+=`<tr>
       <td style="color:var(--muted);font-size:11px">${i+1}</td>
       <td><span class="gp-badge">${m.group}</span></td>
       <td class="t1-name">${FLAG[m.t1]||''} ${m.t1}</td>
-      <td><div class="score-input-wrap">
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="r1-${i}" value="${saved.g1}" placeholder="–" oninput="markInput(this)">
-        <span class="score-sep">×</span>
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="r2-${i}" value="${saved.g2}" placeholder="–" oninput="markInput(this)">
-      </div></td>
+      <td style="text-align:center">${placar}</td>
       <td class="t2-name">${FLAG[m.t2]||''} ${m.t2}</td>
-      <td><span class="result-status ${isDone?'status-done':'status-pending'}" id="rs-${i}">${isDone?'✓ Registrado':'Pendente'}</span></td>
+      <td><span class="result-status ${isDone?'status-done':'status-pending'}">${isDone?'✓ Registrado':'Pendente'}</span></td>
     </tr>`;
   });
   html+='</tbody></table>';
   el.innerHTML=html;
 }
 
-function markInput(inp){inp.classList.toggle('has-value',inp.value!=='');}
-
-function saveResults(){
-  matches.forEach((m,i)=>{
-    const g1=document.getElementById('r1-'+i);
-    const g2=document.getElementById('r2-'+i);
-    if(!g1||!g2) return;
-    const key=m.t1+'||'+m.t2;
-    results[key]={g1:g1.value,g2:g2.value};
-    const isDone=g1.value!==''&&g2.value!=='';
-    const rs=document.getElementById('rs-'+i);
-    if(rs){rs.className='result-status '+(isDone?'status-done':'status-pending');rs.textContent=isDone?'✓ Registrado':'Pendente';}
-  });
-  localStorage.setItem('bolao2026_results',JSON.stringify(results));
-  const fb=document.getElementById('saveFeedback');
-  fb.style.opacity='1';
-  setTimeout(()=>fb.style.opacity='0',2500);
-}
 
 /* ── SCORING ENGINE ── */
 function calcMatchPoints(bet_g1, bet_g2, real_g1, real_g2){
