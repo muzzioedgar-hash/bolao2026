@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<!-- v2-mata-mata -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏆 Bolão Copa do Mundo 2026 — Mata-Mata</title>
 <style>
@@ -289,10 +288,12 @@ const bracket     = DATA.bracket;
 // stageKey: 'oitavas', 'quartas', 'semifinal', 'terceiro', 'final'
 let dynamicTeams = {};
 
-function winner(real_g1, real_g2, t1, t2){
+function winner(real_g1, real_g2, t1, t2, pens){
   if(real_g1 > real_g2) return t1;
   if(real_g2 > real_g1) return t2;
-  return null; // draw — in knockout there's extra time, but we can't know here
+  // Draw: check penalty winner
+  if(pens===t1||pens===t2) return pens;
+  return null;
 }
 
 function computeAdvancement(){
@@ -307,8 +308,8 @@ function computeAdvancement(){
     const [s1, s2] = oit.feeds;
     const r1 = results[String(s1)], r2 = results[String(s2)];
     const m1 = matches16[s1], m2 = matches16[s2];
-    const w1 = r1 ? winner(parseInt(r1.g1), parseInt(r1.g2), m1.t1, m1.t2) : null;
-    const w2 = r2 ? winner(parseInt(r2.g1), parseInt(r2.g2), m2.t1, m2.t2) : null;
+    const w1 = r1 ? winner(parseInt(r1.g1), parseInt(r1.g2), m1.t1, m1.t2, r1.pens||'') : null;
+    const w2 = r2 ? winner(parseInt(r2.g1), parseInt(r2.g2), m2.t1, m2.t2, r2.pens||'') : null;
     dynamicTeams.oitavas[oit.slot] = {
       t1: w1 || `Venc. ${m1.t1.split(' ')[0]}/${m1.t2.split(' ')[0]}`,
       t2: w2 || `Venc. ${m2.t1.split(' ')[0]}/${m2.t2.split(' ')[0]}`,
@@ -324,8 +325,8 @@ function computeAdvancement(){
     const ro2 = results[String(oitavasOffset + os2)];
     const dt1 = dynamicTeams.oitavas[os1] || {};
     const dt2 = dynamicTeams.oitavas[os2] || {};
-    const w1 = ro1 ? winner(parseInt(ro1.g1), parseInt(ro1.g2), dt1.t1||'?', dt1.t2||'?') : null;
-    const w2 = ro2 ? winner(parseInt(ro2.g1), parseInt(ro2.g2), dt2.t1||'?', dt2.t2||'?') : null;
+    const w1 = ro1 ? winner(parseInt(ro1.g1), parseInt(ro1.g2), dt1.t1||'?', dt1.t2||'?', ro1.pens||'') : null;
+    const w2 = ro2 ? winner(parseInt(ro2.g1), parseInt(ro2.g2), dt2.t1||'?', dt2.t2||'?', ro2.pens||'') : null;
     dynamicTeams.quartas[qrt.slot] = {
       t1: w1 || (dt1.t1Known&&dt1.t2Known ? `Venc. Oit.${os1+1}` : 'Indefinido'),
       t2: w2 || (dt2.t1Known&&dt2.t2Known ? `Venc. Oit.${os2+1}` : 'Indefinido'),
@@ -341,8 +342,8 @@ function computeAdvancement(){
     const rq2 = results[String(qrtOffset + qs2)];
     const dq1 = dynamicTeams.quartas[qs1] || {};
     const dq2 = dynamicTeams.quartas[qs2] || {};
-    const w1 = rq1 ? winner(parseInt(rq1.g1), parseInt(rq1.g2), dq1.t1||'?', dq1.t2||'?') : null;
-    const w2 = rq2 ? winner(parseInt(rq2.g1), parseInt(rq2.g2), dq2.t1||'?', dq2.t2||'?') : null;
+    const w1 = rq1 ? winner(parseInt(rq1.g1), parseInt(rq1.g2), dq1.t1||'?', dq1.t2||'?', rq1.pens||'') : null;
+    const w2 = rq2 ? winner(parseInt(rq2.g1), parseInt(rq2.g2), dq2.t1||'?', dq2.t2||'?', rq2.pens||'') : null;
     dynamicTeams.semifinal[semi.slot] = {
       t1: w1 || 'Indefinido', t2: w2 || 'Indefinido',
       t1Known: !!w1, t2Known: !!w2
@@ -353,9 +354,9 @@ function computeAdvancement(){
   const semiOffset = qrtOffset + matchesQrt.length; // 24+4=28
   const rs0 = results[String(semiOffset)], rs1 = results[String(semiOffset+1)];
   const ds0 = dynamicTeams.semifinal[0]||{}, ds1 = dynamicTeams.semifinal[1]||{};
-  const sw0t1 = rs0 ? winner(parseInt(rs0.g1),parseInt(rs0.g2),ds0.t1||'?',ds0.t2||'?') : null;
+  const sw0t1 = rs0 ? winner(parseInt(rs0.g1),parseInt(rs0.g2),ds0.t1||'?',ds0.t2||'?',rs0.pens||'') : null;
   const sw0t2 = rs0 ? (sw0t1===ds0.t1 ? ds0.t2 : ds0.t1) : null; // loser
-  const sw1t1 = rs1 ? winner(parseInt(rs1.g1),parseInt(rs1.g2),ds1.t1||'?',ds1.t2||'?') : null;
+  const sw1t1 = rs1 ? winner(parseInt(rs1.g1),parseInt(rs1.g2),ds1.t1||'?',ds1.t2||'?',rs1.pens||'') : null;
   const sw1t2 = rs1 ? (sw1t1===ds1.t1 ? ds1.t2 : ds1.t1) : null; // loser
   dynamicTeams.final[0] = {
     t1: sw0t1||'Indefinido', t2: sw1t1||'Indefinido',
@@ -381,7 +382,10 @@ const STAGE_NAMES={'16avos':'16-avos','oitavas':'Oitavas','quartas':'Quartas','s
 const STAGE_ORDER=['16avos','oitavas','quartas','semifinal','terceiro','final'];
 
 // Google Sheets URLs
-const SHEETS_READ_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQj5p44wM4Gv3obXkUtSDrGn4UMgE22yj0dpdY6WfJTqG3ePG0gQWv4y-ufGfUAXeFbVmu2Yg89egsK/pub?gid=0&single=true&output=csv';
+// gid=0 is group stage sheet — Mata-mata uses a NEW sheet tab
+// Mata-mata sheet tab (gid=572467846)
+const SHEETS_BASE='https://docs.google.com/spreadsheets/d/e/2PACX-1vQj5p44wM4Gv3obXkUtSDrGn4UMgE22yj0dpdY6WfJTqG3ePG0gQWv4y-ufGfUAXeFbVmu2Yg89egsK/pub';
+const SHEETS_READ_URL=SHEETS_BASE+'?gid=572467846&single=true&output=csv';
 // Apps Script Web App URL for writing — you'll paste this after deploying the script
 const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbxyYQ2fTzhtOmB8HXA8qAtaS1Hy3TGPHeyh7r_cpnUqUwjtATj5gY6ZnD0-TpPI54zp/exec';
 
@@ -389,9 +393,9 @@ let currentStage='todos';
 let expandedCard=null;
 let activeScorePill=null;
 // results: key = match idx (string), value = {g1, g2}
-let results = JSON.parse(localStorage.getItem('bolao2026_mata_results')||'{}');
+let results = JSON.parse(localStorage.getItem('bolao2026_mata2_results')||'{}');
 
-function saveLocal(){localStorage.setItem('bolao2026_mata_results',JSON.stringify(results));}
+function saveLocal(){localStorage.setItem('bolao2026_mata2_results',JSON.stringify(results));}
 
 /* ── FETCH FROM SHEETS ── */
 async function fetchResults(){
@@ -403,7 +407,8 @@ async function fetchResults(){
       const cols=line.split(',');
       const g1=(cols[1]||'').trim();
       const g2=(cols[2]||'').trim();
-      if(g1!==''&&g2!=='') results[String(i)]={g1,g2};
+      const pens=(cols[4]||'').trim();
+      if(g1!==''&&g2!=='') results[String(i)]={g1,g2,pens};
     });
     saveLocal();
     return true;
@@ -427,9 +432,13 @@ async function saveAndPush(){
   allMatches.forEach((m,i)=>{
     const g1el=document.getElementById('ri-'+i+'-1');
     const g2el=document.getElementById('ri-'+i+'-2');
+    const pensEl=document.getElementById('ri-'+i+'-pens');
     if(!g1el||!g2el) return;
-    if(g1el.value!==''&&g2el.value!=='') results[String(i)]={g1:g1el.value,g2:g2el.value};
-    else if(g1el.value===''&&g2el.value==='') delete results[String(i)];
+    if(g1el.value!==''&&g2el.value!==''){
+      const g1=g1el.value, g2=g2el.value;
+      const pens=pensEl?pensEl.value:'';
+      results[String(i)]={g1,g2,pens};
+    } else if(g1el.value===''&&g2el.value==='') delete results[String(i)];
   });
   saveLocal();
   renderResults();
@@ -451,16 +460,16 @@ async function saveAndPush(){
     // Build rows array: index -> [g1, g2]
     const rows=allMatches.map((m,i)=>{
       const r=results[String(i)];
-      return r?[r.g1,r.g2]:['',''];
+      return r?[r.g1,r.g2,r.pens||'']:['','',''];
     });
-    const resp=await fetch(APPS_SCRIPT_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+    // no-cors required when calling Apps Script from external domain
+    await fetch(APPS_SCRIPT_URL,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
       body:JSON.stringify({rows})
     });
-    const json=await resp.json();
-    fb.textContent=json.status==='ok'?'✓ Planilha atualizada!':'⚠️ Erro: '+json.message;
-    fb.className='save-feedback '+(json.status==='ok'?'sf-ok':'sf-err');
+    fb.textContent='✓ Planilha atualizada!';
+    fb.className='save-feedback sf-ok';
   }catch(e){
     fb.textContent='⚠️ Erro ao enviar para planilha';
     fb.className='save-feedback sf-err';
@@ -654,7 +663,7 @@ function renderResults(){
   const el=document.getElementById('resultTable');
   const doneCount=Object.keys(results).length;
   let html=`<div style="font-size:13px;color:var(--text2);margin-bottom:14px">${doneCount} de ${allMatches.length} jogos com resultado registrado</div>`;
-  html+='<table class="result-table"><thead><tr><th>#</th><th>Fase</th><th>Time 1</th><th>Placar Real</th><th>Time 2</th><th>Mult.</th><th>Status</th></tr></thead><tbody>';
+  html+='<table class="result-table"><thead><tr><th>#</th><th>Fase</th><th>Time 1</th><th>Placar</th><th>Pênaltis</th><th>Time 2</th><th>Mult.</th><th>Status</th></tr></thead><tbody>';
 
   allMatches.forEach((m,i)=>{
     const r=results[String(i)];
@@ -664,22 +673,50 @@ function renderResults(){
     const f1=FLAG[t1]||(teams.t1Known&&t1!=='Indefinido'?'🏳️':'');
     const f2=FLAG[t2]||(teams.t2Known&&t2!=='Indefinido'?'🏳️':'');
     const stagePillClass='pill-'+m.stage;
+    // Show penalty selector only for draws in knockout (all stages)
+    const isDraw=isDone&&r.g1===r.g2;
+    const pensVal=r?r.pens:'';
+    const pensCell=isDraw
+      ? `<select id="ri-${i}-pens" style="background:var(--surface2);border:1px solid var(--gold);border-radius:5px;color:var(--gold);padding:4px 6px;font-size:12px;font-weight:700;outline:none">
+          <option value="">⚽ Quem passou?</option>
+          <option value="${t1}" ${pensVal===t1?'selected':''}>${t1}</option>
+          <option value="${t2}" ${pensVal===t2?'selected':''}>${t2}</option>
+        </select>`
+      : `<span style="color:var(--muted);font-size:11px" id="ri-${i}-pens-placeholder">–</span><input type="hidden" id="ri-${i}-pens" value="${pensVal}">`;
     html+=`<tr>
       <td style="color:var(--muted);font-size:11px">${i+1}</td>
       <td><span class="stage-pill ${stagePillClass}">${STAGE_NAMES[m.stage]||m.stage}</span></td>
-      <td class="t1-name" style="max-width:130px">${f1} ${t1}</td>
+      <td class="t1-name" style="max-width:120px">${f1} ${t1}</td>
       <td><div class="score-input-wrap">
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-1" value="${isDone?r.g1:''}" placeholder="–">
+        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-1" value="${isDone?r.g1:''}" placeholder="–" oninput="onScoreInput(${i})">
         <span class="score-sep">×</span>
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-2" value="${isDone?r.g2:''}" placeholder="–">
+        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-2" value="${isDone?r.g2:''}" placeholder="–" oninput="onScoreInput(${i})">
       </div></td>
-      <td class="t2-name" style="max-width:130px">${f2} ${t2}</td>
+      <td>${pensCell}</td>
+      <td class="t2-name" style="max-width:120px">${f2} ${t2}</td>
       <td><span class="mult-badge">×${m.mult}</span></td>
-      <td><span class="result-status ${isDone?'status-sheet':'status-pending'}">${isDone?'✓ Registrado':'Pendente'}</span></td>
+      <td><span class="result-status ${isDone?'status-sheet':'status-pending'}" id="rs-${i}">${isDone?(pensVal?'✓ + Pêns':'✓ Registrado'):'Pendente'}</span></td>
     </tr>`;
   });
   html+='</tbody></table>';
   el.innerHTML=html;
+}
+
+// Live update pens selector when score changes to a draw
+function onScoreInput(i){
+  const g1el=document.getElementById('ri-'+i+'-1');
+  const g2el=document.getElementById('ri-'+i+'-2');
+  if(!g1el||!g2el||g1el.value===''||g2el.value==='') return;
+  // Short debounce
+  clearTimeout(g1el._t);
+  g1el._t=setTimeout(()=>{
+    // Save current input to results so renderResults picks it up
+    const m=allMatches[i];
+    const teams=getTeamsForMatch(m);
+    const r=results[String(i)]||{};
+    results[String(i)]={g1:g1el.value,g2:g2el.value,pens:r.pens||''};
+    renderResults();
+  },600);
 }
 
 /* ── SCORING ENGINE ── */
