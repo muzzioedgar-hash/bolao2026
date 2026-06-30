@@ -34,6 +34,11 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
 .match-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer;}
 .match-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 1px rgba(167,139,250,.2);}
 .match-card.expanded{border-color:var(--purple);}
+/* On mobile, people grid inside expanded card must not overflow the card */
+@media(max-width:640px){
+  .match-card.expanded{overflow:visible;}
+  .match-details{background:var(--surface);border-radius:0 0 12px 12px;}
+}
 .match-header{padding:14px 16px;display:flex;align-items:center;gap:8px;background:var(--surface2);}
 .stage-tag{font-size:10px;font-weight:700;color:var(--purple);background:rgba(167,139,250,.12);padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;}
 .mult-tag{font-size:10px;font-weight:700;color:var(--gold);background:rgba(245,197,24,.1);padding:3px 8px;border-radius:4px;flex-shrink:0;}
@@ -81,9 +86,9 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
 .score-who-title{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;}
 .score-who-names{display:flex;flex-wrap:wrap;gap:4px;}
 .score-who-tag{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);color:var(--text2);font-size:11px;padding:3px 8px;border-radius:4px;}
-.people-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
-@media(max-width:600px){.people-columns{grid-template-columns:1fr 1fr;}}
-@media(max-width:380px){.people-columns{grid-template-columns:1fr;}}
+/* people-columns: 3 cols desktop, 2 cols mobile */
+.people-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;}
+@media(max-width:640px){.people-columns{grid-template-columns:1fr 1fr;}}
 
 /* ── MOBILE OVERRIDES ── */
 @media(max-width:640px){
@@ -93,8 +98,7 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
   .team-name{font-size:13px;}
   .teams-row{padding:12px;}
   .dist-bar-wrap{height:26px;}
-  .person-row .pname{font-size:11px;}
-  .person-row .pscore{font-size:11px;}
+
   .stage-filter{gap:6px;}
   .sfilter{padding:5px 10px;font-size:12px;}
   /* Result table — hide Mult column, shrink others */
@@ -113,13 +117,13 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
   /* Champ grid */
   .champ-grid{grid-template-columns:1fr;}
 }
-.person-row{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:5px;font-size:12px;}
+.person-row{display:flex;align-items:center;gap:5px;padding:4px 8px;border-radius:5px;font-size:12px;min-width:0;overflow:hidden;}
 .person-row .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .outcome-win1 .dot{background:var(--blue);}
 .outcome-draw .dot{background:var(--muted);}
 .outcome-win2 .dot{background:var(--red);}
-.person-row .pname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2);}
-.person-row .pscore{font-weight:600;font-size:12px;flex-shrink:0;}
+.person-row .pname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2);min-width:0;}
+.person-row .pscore{font-weight:700;font-size:12px;flex-shrink:0;white-space:nowrap;padding-left:3px;}
 .outcome-win1 .pscore{color:var(--blue);}
 .outcome-draw .pscore{color:var(--text2);}
 .outcome-win2 .pscore{color:var(--red);}
