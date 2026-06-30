@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<!-- v2-mata-mata -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏆 Bolão Copa do Mundo 2026 — Mata-Mata</title>
 <style>
@@ -388,9 +389,9 @@ let currentStage='todos';
 let expandedCard=null;
 let activeScorePill=null;
 // results: key = match idx (string), value = {g1, g2}
-let results = JSON.parse(localStorage.getItem('bolao2026_ko_results')||'{}');
+let results = JSON.parse(localStorage.getItem('bolao2026_mata_results')||'{}');
 
-function saveLocal(){localStorage.setItem('bolao2026_ko_results',JSON.stringify(results));}
+function saveLocal(){localStorage.setItem('bolao2026_mata_results',JSON.stringify(results));}
 
 /* ── FETCH FROM SHEETS ── */
 async function fetchResults(){
