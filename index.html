@@ -82,7 +82,37 @@ main{padding:20px;max-width:1100px;margin:0 auto;}
 .score-who-names{display:flex;flex-wrap:wrap;gap:4px;}
 .score-who-tag{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);color:var(--text2);font-size:11px;padding:3px 8px;border-radius:4px;}
 .people-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
-@media(max-width:480px){.people-columns{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.people-columns{grid-template-columns:1fr 1fr;}}
+@media(max-width:380px){.people-columns{grid-template-columns:1fr;}}
+
+/* ── MOBILE OVERRIDES ── */
+@media(max-width:640px){
+  main{padding:12px;}
+  .matches-grid{grid-template-columns:1fr;}
+  .match-card{border-radius:10px;}
+  .team-name{font-size:13px;}
+  .teams-row{padding:12px;}
+  .dist-bar-wrap{height:26px;}
+  .person-row .pname{font-size:11px;}
+  .person-row .pscore{font-size:11px;}
+  .stage-filter{gap:6px;}
+  .sfilter{padding:5px 10px;font-size:12px;}
+  /* Result table — hide Mult column, shrink others */
+  .result-table th:nth-child(6),
+  .result-table td:nth-child(6){display:none;}
+  .result-table{font-size:12px;}
+  .result-table th,.result-table td{padding:6px 6px;}
+  .t1-name,.t2-name{max-width:80px!important;font-size:11px;}
+  .score-input{width:34px;font-size:13px;}
+  /* Rank table — hide last-points column */
+  .rank-table th:last-child,
+  .rank-table td:last-child{display:none;}
+  .rank-table th,.rank-table td{padding:8px 8px;}
+  .rank-name{font-size:13px;}
+  .pts-big{font-size:18px;}
+  /* Champ grid */
+  .champ-grid{grid-template-columns:1fr;}
+}
 .person-row{display:flex;align-items:center;gap:6px;padding:4px 8px;border-radius:5px;font-size:12px;}
 .person-row .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .outcome-win1 .dot{background:var(--blue);}
