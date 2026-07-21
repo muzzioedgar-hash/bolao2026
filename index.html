@@ -2,930 +2,475 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏆 Bolão Copa do Mundo 2026 — Mata-Mata</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ranking Bolão Copa 2026 — sem bônus campeão</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
-:root{--bg:#0a0f1a;--surface:#111827;--surface2:#1a2332;--border:#1e2d3d;--gold:#f5c518;--gold2:#e8a800;--green:#22c55e;--blue:#3b82f6;--red:#ef4444;--muted:#6b7280;--text:#f1f5f9;--text2:#94a3b8;--purple:#a78bfa;}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap');
+:root{--bg:#0a0f1a;--sf:#111827;--sf2:#1a2332;--bd:#1e2d3d;--go:#f5c518;--bl:#3b82f6;--pu:#a78bfa;--gn:#22c55e;--mu:#6b7280;--tx:#f1f5f9;--t2:#94a3b8;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
-header{background:linear-gradient(135deg,#0a0f1a 0%,#0f2040 50%,#0a0f1a 100%);border-bottom:2px solid var(--gold);padding:24px 20px;text-align:center;position:relative;overflow:hidden;}
-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(245,197,24,.08) 0%,transparent 70%);}
-.header-emoji{font-size:48px;display:block;margin-bottom:8px;}
-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,6vw,48px);letter-spacing:3px;color:var(--gold);text-shadow:0 0 30px rgba(245,197,24,.3);position:relative;}
-header p{color:var(--text2);font-size:14px;margin-top:6px;position:relative;}
-.stage-badge{display:inline-block;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.4);color:var(--purple);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:10px;text-transform:uppercase;letter-spacing:1px;position:relative;}
-.tabs{display:flex;gap:4px;padding:16px 20px 0;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none;background:var(--surface);}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{padding:10px 16px;border:none;background:transparent;color:var(--text2);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;border-radius:4px 4px 0 0;}
-.tab:hover{color:var(--text);background:rgba(255,255,255,.05);}
-.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-main{padding:20px;max-width:1100px;margin:0 auto;}
-.tab-content{display:none;}.tab-content.active{display:block;}
-
-/* STAGE FILTER */
-.stage-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.sfilter{padding:6px 14px;border:1px solid var(--border);background:var(--surface);color:var(--text2);border-radius:20px;cursor:pointer;font-size:13px;font-weight:600;transition:all .2s;}
-.sfilter:hover{border-color:var(--purple);color:var(--purple);}
-.sfilter.active{background:var(--purple);color:#fff;border-color:var(--purple);}
-
-/* MATCH CARDS */
-.matches-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}
-.match-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer;}
-.match-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 1px rgba(167,139,250,.2);}
-.match-card.expanded{border-color:var(--purple);}
-/* On mobile, people grid inside expanded card must not overflow the card */
-@media(max-width:640px){
-  .match-card.expanded{overflow:visible;}
-  .match-details{background:var(--surface);border-radius:0 0 12px 12px;}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;padding:24px 16px;max-width:900px;margin:0 auto;}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,42px);color:var(--go);letter-spacing:2px;margin-bottom:4px;}
+.sub{color:var(--t2);font-size:13px;margin-bottom:8px;}
+.note{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--t2);margin-bottom:24px;}
+.note strong{color:var(--pu);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead th{background:var(--sf2);color:var(--mu);padding:10px 14px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--bd);}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .15s;}
+tbody tr:hover{background:rgba(255,255,255,.03);}
+td{padding:11px 14px;vertical-align:middle;}
+.pos{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--mu);width:44px;}
+.pos.g{color:#f5c518;}.pos.s{color:#c0c0c0;}.pos.b{color:#cd7f32;}
+.ava{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#000;flex-shrink:0;}
+.name-cell{display:flex;align-items:center;gap:10px;}
+.name{font-weight:600;font-size:14px;}
+.champ-bet{font-size:11px;color:var(--mu);margin-top:2px;}
+.pts{font-family:'Bebas Neue',sans-serif;font-size:24px;text-align:right;}
+.pts-f1{color:var(--bl);}
+.pts-f2{color:var(--pu);}
+.pts-tot{color:var(--go);}
+.bonus-col{font-size:12px;color:var(--gn);font-weight:700;text-align:center;}
+@media(max-width:600px){
+  .pts{font-size:18px;}
+  td{padding:8px 10px;}
+  .champ-bet{display:none;}
 }
-.match-header{padding:14px 16px;display:flex;align-items:center;gap:8px;background:var(--surface2);}
-.stage-tag{font-size:10px;font-weight:700;color:var(--purple);background:rgba(167,139,250,.12);padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;}
-.mult-tag{font-size:10px;font-weight:700;color:var(--gold);background:rgba(245,197,24,.1);padding:3px 8px;border-radius:4px;flex-shrink:0;}
-.date-tag{font-size:11px;color:var(--muted);}
-.teams-row{display:flex;align-items:center;justify-content:space-between;padding:16px;gap:8px;}
-.team-name{font-weight:700;font-size:15px;text-align:center;flex:1;line-height:1.2;}
-.vs{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--muted);flex-shrink:0;}
-.distribution{padding:0 16px 12px;}
-.dist-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:6px;}
-.dist-bar-wrap{display:flex;height:32px;border-radius:8px;overflow:hidden;gap:2px;}
-.dist-seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap;cursor:pointer;transition:filter .15s,opacity .15s;}
-.dist-seg.win1{background:var(--blue);}
-.dist-seg.draw{background:var(--muted);}
-.dist-seg.win2{background:var(--red);}
-.dist-seg:hover{filter:brightness(1.2);}
-.dist-seg.seg-active{filter:brightness(1.25);outline:2px solid #fff;outline-offset:-2px;}
-.dist-seg.seg-dim{opacity:.35;}
-.dist-counts{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;}
-.dist-cnt{cursor:pointer;padding:2px 6px;border-radius:4px;transition:background .15s;font-weight:600;}
-.dist-cnt.win1c{color:var(--blue);}
-.dist-cnt.drawc{color:var(--text2);}
-.dist-cnt.win2c{color:var(--red);}
-.dist-cnt:hover{background:rgba(255,255,255,.07);}
-.dist-cnt.cnt-active{background:rgba(255,255,255,.12);}
-.bar-who{margin:4px 16px 8px;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:none;}
-.bar-who.open{display:block;}
-.bar-who-title{font-size:11px;font-weight:700;margin-bottom:6px;}
-.bwt-win1{color:var(--blue);}.bwt-draw{color:var(--text2);}.bwt-win2{color:var(--red);}
-.bar-who-names{display:flex;flex-wrap:wrap;gap:4px;}
-.bar-who-tag{font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid;}
-.tag-win1{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:#93c5fd;}
-.tag-draw{background:rgba(107,114,128,.1);border-color:rgba(107,114,128,.3);color:var(--text2);}
-.tag-win2{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:#fca5a5;}
-.expand-hint{text-align:center;font-size:11px;color:var(--muted);padding:6px;border-top:1px solid var(--border);}
-.match-details{border-top:1px solid var(--border);padding:16px;display:none;}
-.match-details.open{display:block;}
-.detail-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
-.scores-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
-.score-pill{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;transition:all .18s;}
-.score-pill:hover{border-color:var(--gold);background:rgba(245,197,24,.08);}
-.score-pill.active-pill{border-color:var(--gold);background:rgba(245,197,24,.15);}
-.score-pill .sc{font-weight:700;}.score-pill .scn{font-size:11px;color:var(--gold);background:rgba(245,197,24,.1);padding:1px 5px;border-radius:3px;}
-.score-who{margin-bottom:12px;padding:10px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:none;}
-.score-who.open{display:block;}
-.score-who-title{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:6px;}
-.score-who-names{display:flex;flex-wrap:wrap;gap:4px;}
-.score-who-tag{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);color:var(--text2);font-size:11px;padding:3px 8px;border-radius:4px;}
-/* people-columns: 3 cols desktop, 2 cols mobile */
-.people-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;}
-@media(max-width:640px){.people-columns{grid-template-columns:1fr 1fr;}}
-
-/* ── MOBILE OVERRIDES ── */
-@media(max-width:640px){
-  main{padding:12px;}
-  .matches-grid{grid-template-columns:1fr;}
-  .match-card{border-radius:10px;}
-  .team-name{font-size:13px;}
-  .teams-row{padding:12px;}
-  .dist-bar-wrap{height:26px;}
-
-  .stage-filter{gap:6px;}
-  .sfilter{padding:5px 10px;font-size:12px;}
-  /* Result table — hide Mult column, shrink others */
-  .result-table th:nth-child(6),
-  .result-table td:nth-child(6){display:none;}
-  .result-table{font-size:12px;}
-  .result-table th,.result-table td{padding:6px 6px;}
-  .t1-name,.t2-name{max-width:80px!important;font-size:11px;}
-  .score-input{width:34px;font-size:13px;}
-  /* Rank table — hide last-points column */
-  .rank-table th:last-child,
-  .rank-table td:last-child{display:none;}
-  .rank-table th,.rank-table td{padding:8px 8px;}
-  .rank-name{font-size:13px;}
-  .pts-big{font-size:18px;}
-  /* Champ grid */
-  .champ-grid{grid-template-columns:1fr;}
-}
-.person-row{display:flex;align-items:center;gap:5px;padding:4px 8px;border-radius:5px;font-size:12px;min-width:0;overflow:hidden;}
-.person-row .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.outcome-win1 .dot{background:var(--blue);}
-.outcome-draw .dot{background:var(--muted);}
-.outcome-win2 .dot{background:var(--red);}
-.person-row .pname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2);min-width:0;}
-.person-row .pscore{font-weight:700;font-size:12px;flex-shrink:0;white-space:nowrap;padding-left:3px;}
-.outcome-win1 .pscore{color:var(--blue);}
-.outcome-draw .pscore{color:var(--text2);}
-.outcome-win2 .pscore{color:var(--red);}
-
-/* CHAMP */
-.champ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
-.champ-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.champ-card-header{padding:16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
-.champ-flag{font-size:36px;}
-.champ-team{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;}
-.champ-count{font-size:13px;color:var(--text2);}
-.champ-bar-wrap{padding:12px 16px;}
-.champ-bar-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
-.champ-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:3px;}
-.champ-names{padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:4px;}
-.champ-name-tag{background:rgba(245,197,24,.08);border:1px solid rgba(245,197,24,.2);color:var(--text2);font-size:11px;padding:3px 8px;border-radius:4px;}
-
-/* RESULTADOS */
-.info-box{border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;}
-.info-gold{background:rgba(245,197,24,.06);border:1px solid rgba(245,197,24,.2);color:var(--text2);}
-.info-gold strong{color:var(--gold);}
-.info-purple{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);color:var(--text2);}
-.info-purple strong{color:var(--purple);}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
-.btn{padding:9px 20px;border:none;border-radius:6px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
-.btn-gold{background:var(--gold);color:#000;}.btn-gold:hover{background:var(--gold2);}
-.btn-outline{background:var(--surface2);color:var(--text);border:1px solid var(--border);}.btn-outline:hover{border-color:var(--purple);}
-.btn-green{background:var(--green);color:#000;}.btn-green:hover{filter:brightness(.9);}
-.save-feedback{font-size:12px;opacity:0;transition:opacity .3s;font-weight:600;}
-.sf-ok{color:var(--green);}.sf-err{color:var(--red);}
-.result-table{width:100%;border-collapse:collapse;font-size:13px;}
-.result-table th{text-align:left;padding:10px 12px;background:var(--surface2);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);}
-.result-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.result-table tr:hover td{background:rgba(255,255,255,.02);}
-.t1-name{color:var(--blue);font-weight:600;}
-.t2-name{color:var(--red);font-weight:600;}
-.stage-pill{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;}
-.pill-16avos{color:var(--purple);background:rgba(167,139,250,.1);}
-.pill-oitavas{color:#60a5fa;background:rgba(96,165,250,.1);}
-.pill-quartas{color:var(--gold);background:rgba(245,197,24,.1);}
-.pill-semifinal{color:#f97316;background:rgba(249,115,22,.1);}
-.pill-final,.pill-terceiro{color:var(--red);background:rgba(239,68,68,.1);}
-.mult-badge{font-size:10px;color:var(--purple);background:rgba(167,139,250,.08);padding:2px 5px;border-radius:3px;font-weight:700;}
-.score-input-wrap{display:flex;align-items:center;gap:5px;}
-.score-input{width:40px;padding:5px 4px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:14px;font-weight:700;text-align:center;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif;}
-.score-input:focus{border-color:var(--gold);}
-.score-input.has-value{border-color:var(--green);color:var(--green);}
-.score-sep{color:var(--muted);font-weight:700;}
-.result-status{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600;white-space:nowrap;}
-.status-pending{color:var(--muted);background:rgba(107,114,128,.1);}
-.status-sheet{color:var(--green);background:rgba(34,197,94,.1);}
-.status-manual{color:var(--purple);background:rgba(167,139,250,.1);}
-
-/* RANKING */
-.rank-info{font-size:13px;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;margin-bottom:20px;line-height:1.6;}
-.rank-info strong{color:var(--gold);}
-.rank-table{width:100%;border-collapse:collapse;}
-.rank-table th{text-align:left;padding:10px 12px;background:var(--surface2);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);}
-.rank-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.rank-table tr:hover td{background:rgba(255,255,255,.02);}
-.rank-pos{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--muted);width:40px;}
-.rank-pos.gold{color:#f5c518;}.rank-pos.silver{color:#c0c0c0;}.rank-pos.bronze{color:#cd7f32;}
-.rank-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#000;flex-shrink:0;}
-.rank-name{font-weight:600;font-size:14px;}
-.pts-big{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;}
-.pts-blue{color:var(--blue);}
-.pts-purple{color:var(--purple);}
-.pts-gold{color:var(--gold);}
-.rank-breakdown{font-size:11px;color:var(--text2);display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;}
-.rb-item{background:var(--surface2);border:1px solid var(--border);padding:2px 6px;border-radius:3px;}
-.rb-pts{color:var(--gold);font-weight:700;}
-
-/* PESSOA */
-.search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;width:100%;margin-bottom:20px;outline:none;transition:border-color .2s;}
-.search-box:focus{border-color:var(--gold);}
-.search-box::placeholder{color:var(--muted);}
-.person-result{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
-.person-header{padding:14px 16px;background:var(--surface2);display:flex;align-items:center;gap:10px;cursor:pointer;}
-.person-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--blue));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#000;flex-shrink:0;}
-.person-pname{font-weight:600;font-size:15px;flex:1;}
-.person-champ{font-size:12px;color:var(--gold);background:rgba(245,197,24,.1);padding:3px 8px;border-radius:4px;font-weight:600;}
-.person-bets{padding:0 16px 16px;display:none;}
-.person-bets.open{display:block;}
-.bet-phase-header{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:8px 0 4px;border-bottom:1px solid var(--border);margin-bottom:4px;}
-.person-bet-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(30,45,61,.5);font-size:13px;}
-.person-bet-row:last-child{border-bottom:none;}
-.bet-match{color:var(--text2);flex:1;}
-.bet-score{font-weight:700;}
-.bet-score.win1{color:var(--blue);}
-.bet-score.draw{color:var(--text2);}
-.bet-score.win2{color:var(--red);}
-
-/* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:24px;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--gold);line-height:1;}
-.stat-label{font-size:13px;color:var(--text2);margin-top:4px;}
-.legend{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);}
-.legend-dot{width:10px;height:10px;border-radius:2px;}
-.ld-win1{background:var(--blue);}.ld-draw{background:var(--muted);}.ld-win2{background:var(--red);}
-.no-results{text-align:center;color:var(--muted);padding:40px;font-size:14px;}
 </style>
 </head>
 <body>
-<header>
-  <span class="header-emoji">🏆</span>
-  <h1>Bolão Copa do Mundo 2026</h1>
-  <p>38 participantes · Fase eliminatória</p>
-  <div class="stage-badge">⚡ Mata-Mata — 16-avos · Oitavas · Quartas · Semi · Final</div>
-</header>
-<div class="tabs">
-  <button class="tab active" onclick="showTab('jogos',this)">🎯 Jogos</button>
-  <button class="tab" onclick="showTab('campeao',this)">🏆 Campeão</button>
-  <button class="tab" onclick="showTab('resultados',this)">📋 Resultados</button>
-  <button class="tab" onclick="showTab('rank',this)">🥇 Ranking</button>
-  <button class="tab" onclick="showTab('stats',this)">📊 Curiosidades</button>
-  <button class="tab" onclick="showTab('pessoa',this)">👤 Por Pessoa</button>
-</div>
-<main>
-
-<!-- JOGOS -->
-<div class="tab-content active" id="tab-jogos">
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot ld-win1"></div>Vitória Time 1 (azul)</div>
-    <div class="legend-item"><div class="legend-dot ld-draw"></div>Empate</div>
-    <div class="legend-item"><div class="legend-dot ld-win2"></div>Vitória Time 2 (vermelho)</div>
-    <div class="legend-item" style="margin-left:auto;font-size:11px;color:var(--muted)">Clique no gráfico para ver quem apostou</div>
-  </div>
-  <div class="stage-filter" id="stageFilter"></div>
-  <div class="matches-grid" id="matchesGrid"></div>
-</div>
-
-<!-- CAMPEÃO -->
-<div class="tab-content" id="tab-campeao">
-  <div class="info-box info-gold"><strong>Bônus de 50 pontos</strong> para quem acertar o campeão. Será contabilizado no ranking ao final da Copa.</div>
-  <div class="champ-grid" id="champGrid"></div>
-</div>
-
-<!-- RESULTADOS -->
-<div class="tab-content" id="tab-resultados">
-  <div class="info-box info-gold">
-    <strong>Pontuação base:</strong> Placar exato <strong>10pts</strong> · Gols vencedor/perdedor/saldo <strong>7pts</strong> · Só vencedor <strong>5pts</strong> — multiplicado pelo fator da fase.<br>
-    <strong>Regra de pontuação:</strong> considera apenas o placar (gols de cada time), independente de qual time joga.
-  </div>
-  <div class="info-box info-purple">
-    ✏️ Preencha o placar abaixo e clique <strong>Salvar e Enviar para Planilha</strong> — o Google Sheets é atualizado automaticamente. Ou <strong>Buscar da Planilha</strong> para carregar resultados já registrados.
-  </div>
-  <div class="btn-row">
-    <button class="btn btn-gold" onclick="fetchAndRender()">🔄 Buscar da Planilha</button>
-    <button class="btn btn-green" onclick="saveAndPush()">💾 Salvar e Enviar para Planilha</button>
-    <span class="save-feedback" id="saveFeedback"></span>
-  </div>
-  <div id="resultTable"><div class="no-results">Carregando...</div></div>
-</div>
-
-<!-- RANKING -->
-<div class="tab-content" id="tab-rank">
-  <div class="rank-info" id="rankInfo">Calculando...</div>
-  <div id="rankContent"></div>
-</div>
-
-<!-- STATS -->
-<div class="tab-content" id="tab-stats">
-  <div class="stats-grid" id="statsGrid"></div>
-  <div id="funFacts"></div>
-</div>
-
-<!-- PESSOA -->
-<div class="tab-content" id="tab-pessoa">
-  <input class="search-box" id="personSearch" type="text" placeholder="🔍 Buscar participante..." oninput="filterPersons()">
-  <div id="personList"></div>
-</div>
-
-</main>
-<script>
-const DATA = {"allMatches":[{"idx":0,"slot":0,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"28/06","t1":"África do Sul","t2":"Canadá","win1":3,"draw":11,"win2":23,"total":37,"scores":[{"score":"1-1","count":11},{"score":"1-2","count":11},{"score":"0-2","count":7},{"score":"0-1","count":4},{"score":"2-1","count":2},{"score":"0-3","count":1},{"score":"2-0","count":1}],"people":[{"name":"Allan Roitman","g1":0,"g2":1,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":1,"outcome":"draw"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":0,"g2":2,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":2,"outcome":"win2"},{"name":"Claudio Nonato","g1":0,"g2":2,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":0,"g2":1,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Ivo","g1":0,"g2":1,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio Santos","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":0,"g2":2,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":1,"g2":1,"outcome":"draw"},{"name":"Gustavo Reichembach","g1":1,"g2":2,"outcome":"win2"},{"name":"Igor Reis","g1":0,"g2":2,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":1,"outcome":"draw"},{"name":"Lucas Palhares","g1":0,"g2":1,"outcome":"win2"},{"name":"Marcelo Neves","g1":1,"g2":1,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":1,"outcome":"draw"},{"name":"Pier Pesce","g1":1,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":0,"g2":3,"outcome":"win2"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":0,"g2":2,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":1,"g2":2,"outcome":"win2"},{"name":"Ronny Lubinski","g1":0,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":1,"outcome":"draw"},{"name":"Valdemiro Neto","g1":1,"g2":1,"outcome":"draw"}]},{"idx":1,"slot":1,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"29/06","t1":"Alemanha","t2":"Paraguai","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"2-0","count":14},{"score":"2-1","count":9},{"score":"3-0","count":6},{"score":"3-1","count":6},{"score":"1-0","count":1},{"score":"5-0","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":0,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":0,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":3,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":3,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":3,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":3,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":5,"g2":0,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":3,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":0,"outcome":"win1"}]},{"idx":2,"slot":2,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"29/06","t1":"Holanda","t2":"Marrocos","win1":22,"draw":15,"win2":0,"total":37,"scores":[{"score":"2-1","count":14},{"score":"1-1","count":9},{"score":"2-2","count":6},{"score":"3-2","count":3},{"score":"3-1","count":3},{"score":"2-0","count":2}],"people":[{"name":"Allan Roitman","g1":2,"g2":2,"outcome":"draw"},{"name":"Augusto Passos","g1":3,"g2":2,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Cestaro","g1":3,"g2":1,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":1,"g2":1,"outcome":"draw"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":1,"g2":1,"outcome":"draw"},{"name":"Edison Terra","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":2,"outcome":"draw"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":1,"outcome":"draw"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":2,"outcome":"draw"},{"name":"Igor Reis","g1":1,"g2":1,"outcome":"draw"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":1,"g2":1,"outcome":"draw"},{"name":"Lucas Palhares","g1":1,"g2":1,"outcome":"draw"},{"name":"Marcelo Neves","g1":3,"g2":2,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":1,"outcome":"draw"},{"name":"Rafaella Linares","g1":2,"g2":2,"outcome":"draw"},{"name":"Renato Pellicci","g1":2,"g2":2,"outcome":"draw"},{"name":"Ricardo Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":2,"outcome":"draw"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":3,"g2":2,"outcome":"win1"}]},{"idx":3,"slot":3,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"29/06","t1":"Brasil","t2":"Japão","win1":34,"draw":2,"win2":1,"total":37,"scores":[{"score":"2-1","count":13},{"score":"3-1","count":10},{"score":"2-0","count":8},{"score":"3-0","count":2},{"score":"1-0","count":1},{"score":"1-1","count":1},{"score":"2-2","count":1},{"score":"0-1","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Mizuno","g1":1,"g2":1,"outcome":"draw"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":3,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":2,"outcome":"draw"},{"name":"Edgar Muzzio","g1":3,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":3,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":0,"g2":1,"outcome":"win2"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":3,"g2":1,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":3,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":2,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":3,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":3,"g2":1,"outcome":"win1"}]},{"idx":4,"slot":4,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"30/06","t1":"França","t2":"Suécia","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"3-1","count":11},{"score":"3-0","count":9},{"score":"2-0","count":8},{"score":"2-1","count":4},{"score":"4-1","count":3},{"score":"4-0","count":1},{"score":"5-2","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":4,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Cestaro","g1":3,"g2":1,"outcome":"win1"},{"name":"Bruno Mizuno","g1":3,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":3,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":3,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":3,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":3,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":4,"g2":1,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":4,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":3,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":4,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":3,"g2":1,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":5,"g2":2,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":3,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":3,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":3,"g2":0,"outcome":"win1"}]},{"idx":5,"slot":5,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"30/06","t1":"Costa do Marfim","t2":"Noruega","win1":2,"draw":11,"win2":24,"total":37,"scores":[{"score":"1-2","count":19},{"score":"1-1","count":6},{"score":"2-2","count":5},{"score":"0-2","count":3},{"score":"3-2","count":1},{"score":"1-3","count":1},{"score":"2-1","count":1},{"score":"0-1","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":0,"g2":2,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":1,"outcome":"draw"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":1,"outcome":"draw"},{"name":"Claudio Nonato","g1":1,"g2":2,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":2,"g2":2,"outcome":"draw"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":2,"g2":2,"outcome":"draw"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":0,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":1,"g2":1,"outcome":"draw"},{"name":"Igor Reis","g1":1,"g2":2,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":1,"outcome":"draw"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":1,"g2":2,"outcome":"win2"},{"name":"Marcelo Neves","g1":1,"g2":2,"outcome":"win2"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":3,"g2":2,"outcome":"win1"},{"name":"Paulo Mattos","g1":1,"g2":2,"outcome":"win2"},{"name":"Pier Pesce","g1":2,"g2":2,"outcome":"draw"},{"name":"Rafaella Linares","g1":1,"g2":3,"outcome":"win2"},{"name":"Renato Pellicci","g1":2,"g2":2,"outcome":"draw"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":1,"g2":2,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":0,"g2":1,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":2,"g2":2,"outcome":"draw"}]},{"idx":6,"slot":6,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"30/06","t1":"México","t2":"Equador","win1":25,"draw":10,"win2":2,"total":37,"scores":[{"score":"2-1","count":16},{"score":"1-1","count":8},{"score":"1-0","count":6},{"score":"2-0","count":3},{"score":"2-2","count":2},{"score":"1-2","count":2}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":2,"outcome":"draw"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":1,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":1,"outcome":"draw"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":1,"g2":1,"outcome":"draw"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":1,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":1,"outcome":"draw"},{"name":"Pier Pesce","g1":1,"g2":1,"outcome":"draw"},{"name":"Rafaella Linares","g1":2,"g2":2,"outcome":"draw"},{"name":"Renato Pellicci","g1":2,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":1,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":1,"g2":2,"outcome":"win2"}]},{"idx":7,"slot":7,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"01/07","t1":"Estados Unidos","t2":"Bósnia","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"2-1","count":17},{"score":"2-0","count":12},{"score":"3-1","count":3},{"score":"3-0","count":2},{"score":"1-0","count":1},{"score":"4-0","count":1},{"score":"3-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":3,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":1,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":1,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":4,"g2":0,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":2,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":3,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":8,"slot":8,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"01/07","t1":"Bélgica","t2":"Senegal","win1":14,"draw":13,"win2":10,"total":37,"scores":[{"score":"2-1","count":9},{"score":"1-1","count":8},{"score":"1-2","count":6},{"score":"2-2","count":5},{"score":"0-1","count":3},{"score":"1-0","count":3},{"score":"2-0","count":2},{"score":"1-3","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":0,"g2":1,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Cestaro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":1,"g2":1,"outcome":"draw"},{"name":"Danilo Gonsalves","g1":2,"g2":2,"outcome":"draw"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":1,"outcome":"draw"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":1,"outcome":"draw"},{"name":"Gustavo Reichembach","g1":1,"g2":3,"outcome":"win2"},{"name":"Igor Reis","g1":1,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":1,"g2":1,"outcome":"draw"},{"name":"Leticia Martins","g1":2,"g2":2,"outcome":"draw"},{"name":"Lucas Palhares","g1":1,"g2":1,"outcome":"draw"},{"name":"Marcelo Neves","g1":1,"g2":2,"outcome":"win2"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":2,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":1,"outcome":"draw"},{"name":"Pier Pesce","g1":2,"g2":2,"outcome":"draw"},{"name":"Rafaella Linares","g1":1,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":2,"outcome":"draw"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":0,"g2":1,"outcome":"win2"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":9,"slot":9,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"01/07","t1":"Inglaterra","t2":"RD Congo","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"2-0","count":20},{"score":"3-0","count":9},{"score":"2-1","count":4},{"score":"3-1","count":3},{"score":"3-2","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":3,"g2":0,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":0,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":3,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":3,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":2,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":3,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":3,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":0,"outcome":"win1"}]},{"idx":10,"slot":10,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"02/07","t1":"Portugal","t2":"Croácia","win1":20,"draw":10,"win2":7,"total":37,"scores":[{"score":"2-1","count":12},{"score":"1-1","count":7},{"score":"1-2","count":4},{"score":"0-1","count":3},{"score":"1-0","count":3},{"score":"2-0","count":2},{"score":"3-1","count":2},{"score":"2-2","count":2}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":0,"g2":1,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":1,"outcome":"draw"},{"name":"Claudio Nonato","g1":3,"g2":2,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":2,"g2":0,"outcome":"win1"},{"name":"Edison Terra","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Camelyer","g1":1,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":1,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":1,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":3,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":0,"g2":1,"outcome":"win2"},{"name":"Marcelo Neves","g1":1,"g2":1,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":0,"g2":0,"outcome":"draw"},{"name":"Pier Pesce","g1":2,"g2":2,"outcome":"draw"},{"name":"Rafaella Linares","g1":2,"g2":2,"outcome":"draw"},{"name":"Renato Pellicci","g1":1,"g2":1,"outcome":"draw"},{"name":"Ricardo Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":0,"g2":1,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":1,"outcome":"draw"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":11,"slot":11,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"02/07","t1":"Espanha","t2":"Áustria","win1":35,"draw":0,"win2":2,"total":37,"scores":[{"score":"2-0","count":20},{"score":"2-1","count":7},{"score":"3-0","count":4},{"score":"1-0","count":4},{"score":"1-2","count":1},{"score":"0-1","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":3,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":0,"g2":1,"outcome":"win2"},{"name":"Edison Terra","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":0,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":0,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":1,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":1,"g2":0,"outcome":"win1"},{"name":"Renato Pellicci","g1":1,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":12,"slot":12,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"03/07","t1":"Argentina","t2":"Cabo Verde","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"3-0","count":17},{"score":"2-0","count":8},{"score":"4-0","count":5},{"score":"2-1","count":3},{"score":"3-1","count":2},{"score":"1-0","count":1},{"score":"4-1","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":3,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Cestaro","g1":3,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":3,"g2":0,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":3,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":3,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":4,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":3,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":3,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":4,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":4,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":3,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":0,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":4,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":3,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":3,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":3,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":3,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":0,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":4,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":3,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":4,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":3,"g2":0,"outcome":"win1"}]},{"idx":13,"slot":13,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"03/07","t1":"Austrália","t2":"Egito","win1":9,"draw":10,"win2":18,"total":37,"scores":[{"score":"1-1","count":9},{"score":"1-2","count":8},{"score":"0-1","count":7},{"score":"1-0","count":5},{"score":"2-1","count":4},{"score":"0-2","count":3},{"score":"0-0","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":1,"outcome":"draw"},{"name":"Bernardo Ribeiro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Cestaro","g1":0,"g2":1,"outcome":"win2"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":0,"g2":2,"outcome":"win2"},{"name":"Claudio Nonato","g1":0,"g2":2,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":2,"outcome":"win2"},{"name":"Edgar Muzzio","g1":0,"g2":1,"outcome":"win2"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":0,"g2":1,"outcome":"win2"},{"name":"Fabio Santos","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":1,"outcome":"draw"},{"name":"Gustavo Reichembach","g1":0,"g2":1,"outcome":"win2"},{"name":"Igor Reis","g1":0,"g2":1,"outcome":"win2"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":1,"g2":1,"outcome":"draw"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":0,"g2":0,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":0,"g2":1,"outcome":"win2"},{"name":"Rafaella Linares","g1":0,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":1,"g2":1,"outcome":"draw"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":1,"g2":1,"outcome":"draw"},{"name":"Rodrigo Curiele","g1":1,"g2":1,"outcome":"draw"},{"name":"Ronny Lubinski","g1":0,"g2":1,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":1,"g2":0,"outcome":"win1"}]},{"idx":14,"slot":14,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"03/07","t1":"Suíça","t2":"Argélia","win1":30,"draw":2,"win2":5,"total":37,"scores":[{"score":"2-1","count":12},{"score":"1-0","count":10},{"score":"2-0","count":7},{"score":"1-2","count":5},{"score":"3-1","count":1},{"score":"0-0","count":1},{"score":"1-1","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":1,"g2":0,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":0,"g2":0,"outcome":"draw"},{"name":"Eduardo Ivo","g1":1,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":1,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":1,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":1,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":1,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":2,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":1,"g2":2,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":1,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":15,"slot":15,"stage":"16avos","stageName":"2ª fase","mult":1.5,"date":"03/07","t1":"Colômbia","t2":"Gana","win1":34,"draw":3,"win2":0,"total":37,"scores":[{"score":"2-1","count":20},{"score":"2-0","count":9},{"score":"1-0","count":3},{"score":"0-0","count":1},{"score":"1-1","count":1},{"score":"2-2","count":1},{"score":"3-1","count":1},{"score":"3-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":0,"g2":0,"outcome":"draw"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":1,"g2":1,"outcome":"draw"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":2,"outcome":"draw"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":3,"g2":1,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":2,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":16,"slot":0,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":0,"draw":1,"win2":36,"total":37,"scores":[{"score":"1-2","count":23},{"score":"1-3","count":6},{"score":"0-2","count":5},{"score":"2-3","count":1},{"score":"0-1","count":1},{"score":"2-2","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":3,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":0,"g2":2,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":0,"g2":2,"outcome":"win2"},{"name":"Claudio Nonato","g1":1,"g2":2,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":3,"outcome":"win2"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":3,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio Santos","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":0,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":3,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":1,"g2":3,"outcome":"win2"},{"name":"Igor Reis","g1":1,"g2":2,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":1,"g2":2,"outcome":"win2"},{"name":"Marcelo Neves","g1":0,"g2":2,"outcome":"win2"},{"name":"Matheus Oliveira","g1":1,"g2":2,"outcome":"win2"},{"name":"Maurício Correa","g1":1,"g2":3,"outcome":"win2"},{"name":"Paulo Mattos","g1":1,"g2":2,"outcome":"win2"},{"name":"Pier Pesce","g1":1,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":2,"g2":3,"outcome":"win2"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":0,"g2":1,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":1,"g2":2,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":2,"g2":2,"outcome":"draw"},{"name":"Thiago Cabido","g1":0,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":1,"g2":2,"outcome":"win2"}]},{"idx":17,"slot":1,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":0,"draw":2,"win2":35,"total":37,"scores":[{"score":"1-2","count":10},{"score":"0-2","count":10},{"score":"1-3","count":5},{"score":"0-3","count":5},{"score":"0-1","count":3},{"score":"1-4","count":1},{"score":"2-3","count":1},{"score":"1-1","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":3,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":4,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":0,"g2":3,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":3,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":3,"outcome":"win2"},{"name":"Claudio Nonato","g1":2,"g2":3,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":3,"outcome":"win2"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":0,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":0,"g2":2,"outcome":"win2"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio Santos","g1":0,"g2":3,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":0,"g2":1,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":3,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":0,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":0,"g2":2,"outcome":"win2"},{"name":"Igor Reis","g1":1,"g2":1,"outcome":"draw"},{"name":"Leonardo Braga","g1":0,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":0,"g2":1,"outcome":"win2"},{"name":"Marcelo Neves","g1":2,"g2":2,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":2,"outcome":"win2"},{"name":"Maurício Correa","g1":0,"g2":3,"outcome":"win2"},{"name":"Paulo Mattos","g1":0,"g2":2,"outcome":"win2"},{"name":"Pier Pesce","g1":0,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":0,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":0,"g2":1,"outcome":"win2"},{"name":"Ricardo Martins","g1":0,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":0,"g2":3,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":1,"g2":2,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":0,"g2":3,"outcome":"win2"},{"name":"Valdemiro Neto","g1":1,"g2":2,"outcome":"win2"}]},{"idx":18,"slot":2,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":30,"draw":4,"win2":3,"total":37,"scores":[{"score":"2-1","count":22},{"score":"1-1","count":4},{"score":"2-0","count":3},{"score":"1-2","count":3},{"score":"1-0","count":2},{"score":"3-1","count":2},{"score":"3-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":1,"outcome":"draw"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":3,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":1,"outcome":"draw"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":1,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":2,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":3,"g2":2,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":19,"slot":3,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":3,"draw":7,"win2":27,"total":37,"scores":[{"score":"1-2","count":13},{"score":"0-1","count":8},{"score":"1-1","count":7},{"score":"0-2","count":3},{"score":"2-1","count":2},{"score":"1-3","count":2},{"score":"1-0","count":1},{"score":"2-3","count":1}],"people":[{"name":"Allan Roitman","g1":0,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Cestaro","g1":1,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":1,"outcome":"draw"},{"name":"Claudio Nonato","g1":0,"g2":1,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":2,"outcome":"win2"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Ivo","g1":0,"g2":1,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":0,"g2":1,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":2,"g2":3,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":1,"g2":3,"outcome":"win2"},{"name":"Igor Reis","g1":1,"g2":2,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":1,"g2":2,"outcome":"win2"},{"name":"Marcelo Neves","g1":0,"g2":1,"outcome":"win2"},{"name":"Matheus Oliveira","g1":0,"g2":1,"outcome":"win2"},{"name":"Maurício Correa","g1":1,"g2":3,"outcome":"win2"},{"name":"Paulo Mattos","g1":0,"g2":1,"outcome":"win2"},{"name":"Pier Pesce","g1":0,"g2":1,"outcome":"win2"},{"name":"Rafaella Linares","g1":1,"g2":1,"outcome":"draw"},{"name":"Renato Pellicci","g1":1,"g2":1,"outcome":"draw"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":1,"g2":1,"outcome":"draw"},{"name":"Rodrigo Curiele","g1":1,"g2":2,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":0,"g2":1,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":0,"g2":2,"outcome":"win2"}]},{"idx":20,"slot":4,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":6,"draw":6,"win2":25,"total":37,"scores":[{"score":"1-2","count":17},{"score":"0-0","count":3},{"score":"0-2","count":3},{"score":"1-1","count":3},{"score":"0-1","count":3},{"score":"1-0","count":2},{"score":"2-1","count":2},{"score":"2-0","count":2}],"people":[{"name":"Allan Roitman","g1":1,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":0,"g2":0,"outcome":"draw"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":0,"g2":2,"outcome":"win2"},{"name":"Claudio Nonato","g1":1,"g2":2,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":2,"outcome":"win2"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Camelyer","g1":0,"g2":0,"outcome":"draw"},{"name":"Eduardo Ivo","g1":0,"g2":1,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio Santos","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":0,"g2":2,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":0,"g2":1,"outcome":"win2"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":1,"g2":2,"outcome":"win2"},{"name":"Maurício Correa","g1":1,"g2":0,"outcome":"win1"},{"name":"Paulo Mattos","g1":1,"g2":1,"outcome":"draw"},{"name":"Pier Pesce","g1":1,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":0,"g2":0,"outcome":"draw"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":3,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":1,"g2":2,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":3,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":0,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":21,"slot":5,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":17,"draw":13,"win2":7,"total":37,"scores":[{"score":"2-1","count":11},{"score":"1-1","count":10},{"score":"1-0","count":6},{"score":"1-2","count":4},{"score":"2-2","count":2},{"score":"0-1","count":2},{"score":"0-2","count":1},{"score":"0-0","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":2,"outcome":"draw"},{"name":"Augusto Passos","g1":2,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Mizuno","g1":0,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":1,"outcome":"draw"},{"name":"Claudio Nonato","g1":1,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":0,"g2":0,"outcome":"draw"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Perez","g1":1,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":0,"g2":1,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":1,"outcome":"draw"},{"name":"Gustavo Reichembach","g1":2,"g2":2,"outcome":"draw"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":1,"g2":1,"outcome":"draw"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":1,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":1,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":1,"outcome":"draw"},{"name":"Rafaella Linares","g1":2,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":2,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":1,"outcome":"draw"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":22,"slot":6,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":37,"draw":0,"win2":0,"total":37,"scores":[{"score":"2-0","count":12},{"score":"3-0","count":8},{"score":"2-1","count":7},{"score":"3-1","count":6},{"score":"4-1","count":2},{"score":"4-2","count":1},{"score":"4-0","count":1}],"people":[{"name":"Allan Roitman","g1":3,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":3,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":0,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":3,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":4,"g2":1,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":3,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":3,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":0,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":0,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":3,"g2":1,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":4,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":3,"g2":1,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":4,"g2":2,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":0,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":3,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":0,"outcome":"win1"},{"name":"Sergio Marcondes","g1":4,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":2,"g2":0,"outcome":"win1"}]},{"idx":23,"slot":7,"stage":"oitavas","stageName":"Oitavas","mult":1.5,"date":"","t1":"Indefinido","t2":"Indefinido","win1":2,"draw":7,"win2":28,"total":37,"scores":[{"score":"1-2","count":18},{"score":"0-1","count":8},{"score":"1-1","count":5},{"score":"2-1","count":2},{"score":"0-0","count":2},{"score":"0-2","count":2}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":0,"g2":1,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":1,"g2":2,"outcome":"win2"},{"name":"Claudio Nonato","g1":0,"g2":1,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":0,"g2":1,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":1,"g2":1,"outcome":"draw"},{"name":"Gustavo Reichembach","g1":1,"g2":1,"outcome":"draw"},{"name":"Igor Reis","g1":0,"g2":0,"outcome":"draw"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Lucas Palhares","g1":0,"g2":1,"outcome":"win2"},{"name":"Marcelo Neves","g1":0,"g2":2,"outcome":"win2"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":2,"outcome":"win2"},{"name":"Paulo Mattos","g1":0,"g2":1,"outcome":"win2"},{"name":"Pier Pesce","g1":0,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":1,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":0,"g2":1,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":0,"g2":0,"outcome":"draw"},{"name":"Ronny Lubinski","g1":0,"g2":1,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":0,"g2":1,"outcome":"win2"},{"name":"Valdemiro Neto","g1":1,"g2":2,"outcome":"win2"}]},{"idx":24,"slot":0,"stage":"quartas","stageName":"Quartas","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":33,"draw":1,"win2":3,"total":37,"scores":[{"score":"2-1","count":19},{"score":"3-1","count":7},{"score":"2-0","count":5},{"score":"1-2","count":2},{"score":"3-2","count":2},{"score":"1-1","count":1},{"score":"0-1","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Mizuno","g1":1,"g2":1,"outcome":"draw"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":0,"g2":1,"outcome":"win2"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":3,"g2":1,"outcome":"win1"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":3,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":3,"g2":2,"outcome":"win1"},{"name":"Paulo Mattos","g1":3,"g2":1,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":2,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":1,"g2":2,"outcome":"win2"}]},{"idx":25,"slot":1,"stage":"quartas","stageName":"Quartas","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":30,"draw":6,"win2":1,"total":37,"scores":[{"score":"2-1","count":11},{"score":"2-0","count":10},{"score":"1-0","count":8},{"score":"2-2","count":4},{"score":"1-1","count":2},{"score":"0-1","count":1},{"score":"3-1","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":1,"g2":1,"outcome":"draw"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":1,"g2":0,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":1,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":2,"outcome":"draw"},{"name":"Lucas Palhares","g1":2,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":1,"g2":0,"outcome":"win1"},{"name":"Matheus Oliveira","g1":1,"g2":0,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":0,"g2":1,"outcome":"win2"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":2,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":2,"outcome":"draw"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":2,"g2":2,"outcome":"draw"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":2,"outcome":"draw"},{"name":"Sergio Marcondes","g1":3,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":1,"g2":0,"outcome":"win1"}]},{"idx":26,"slot":2,"stage":"quartas","stageName":"Quartas","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":16,"draw":10,"win2":11,"total":37,"scores":[{"score":"2-1","count":11},{"score":"1-1","count":9},{"score":"1-2","count":7},{"score":"1-0","count":3},{"score":"0-1","count":2},{"score":"3-1","count":1},{"score":"0-2","count":1},{"score":"1-3","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":1,"outcome":"draw"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":1,"g2":1,"outcome":"draw"},{"name":"Bruno Mizuno","g1":1,"g2":1,"outcome":"draw"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":1,"outcome":"draw"},{"name":"Claudio Nonato","g1":1,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":1,"g2":2,"outcome":"win2"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":1,"outcome":"draw"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":1,"g2":3,"outcome":"win2"},{"name":"Igor Reis","g1":0,"g2":1,"outcome":"win2"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":3,"g2":2,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":0,"g2":0,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":2,"outcome":"win2"},{"name":"Paulo Mattos","g1":1,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":1,"g2":1,"outcome":"draw"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":0,"g2":1,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":1,"g2":1,"outcome":"draw"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":27,"slot":3,"stage":"quartas","stageName":"Quartas","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":31,"draw":4,"win2":2,"total":37,"scores":[{"score":"2-1","count":13},{"score":"2-0","count":12},{"score":"2-2","count":2},{"score":"1-0","count":2},{"score":"3-1","count":2},{"score":"1-1","count":2},{"score":"3-0","count":1},{"score":"1-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":0,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":2,"outcome":"draw"},{"name":"Claudio Nonato","g1":2,"g2":0,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":0,"outcome":"win1"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":0,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":2,"outcome":"draw"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":2,"g2":1,"outcome":"win1"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":3,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":0,"outcome":"win1"},{"name":"Igor Reis","g1":1,"g2":1,"outcome":"draw"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":1,"g2":0,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":1,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":2,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":1,"outcome":"draw"},{"name":"Rafaella Linares","g1":2,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":2,"g2":0,"outcome":"win1"},{"name":"Roberta Pereira","g1":3,"g2":2,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":0,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":3,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":28,"slot":0,"stage":"semifinal","stageName":"Semifinal","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":24,"draw":9,"win2":4,"total":37,"scores":[{"score":"2-1","count":11},{"score":"2-0","count":7},{"score":"2-2","count":5},{"score":"1-1","count":4},{"score":"1-2","count":3},{"score":"3-1","count":3},{"score":"3-0","count":1},{"score":"3-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":2,"g2":0,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":1,"g2":2,"outcome":"win2"},{"name":"Cirilo Vieira","g1":3,"g2":0,"outcome":"win1"},{"name":"Claudio Nonato","g1":3,"g2":2,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":2,"g2":1,"outcome":"win1"},{"name":"Edison Terra","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":2,"g2":0,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":2,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":2,"g2":2,"outcome":"draw"},{"name":"Igor Reis","g1":2,"g2":0,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":2,"outcome":"draw"},{"name":"Lucas Palhares","g1":2,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":2,"g2":2,"outcome":"draw"},{"name":"Matheus Oliveira","g1":2,"g2":2,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":1,"outcome":"draw"},{"name":"Paulo Mattos","g1":2,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":0,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":1,"outcome":"win1"},{"name":"Renato Pellicci","g1":3,"g2":1,"outcome":"win1"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":1,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":2,"outcome":"draw"},{"name":"Thiago Cabido","g1":2,"g2":1,"outcome":"win1"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":29,"slot":1,"stage":"semifinal","stageName":"Semifinal","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":13,"draw":5,"win2":19,"total":37,"scores":[{"score":"1-2","count":13},{"score":"2-1","count":11},{"score":"1-1","count":4},{"score":"0-1","count":3},{"score":"1-3","count":2},{"score":"1-0","count":2},{"score":"2-2","count":1},{"score":"0-2","count":1}],"people":[{"name":"Allan Roitman","g1":2,"g2":1,"outcome":"win1"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":1,"g2":2,"outcome":"win2"},{"name":"Bruno Cestaro","g1":1,"g2":3,"outcome":"win2"},{"name":"Bruno Mizuno","g1":1,"g2":2,"outcome":"win2"},{"name":"Carlos Eduardo","g1":1,"g2":0,"outcome":"win1"},{"name":"Cirilo Vieira","g1":2,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":0,"g2":1,"outcome":"win2"},{"name":"Danilo Gonsalves","g1":1,"g2":1,"outcome":"draw"},{"name":"Edgar Muzzio","g1":1,"g2":0,"outcome":"win1"},{"name":"Edison Terra","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":1,"g2":1,"outcome":"draw"},{"name":"Eduardo Ivo","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":1,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":0,"g2":1,"outcome":"win2"},{"name":"Guilherme Majzoub","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":1,"g2":3,"outcome":"win2"},{"name":"Igor Reis","g1":2,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":2,"g2":1,"outcome":"win1"},{"name":"Marcelo Neves","g1":0,"g2":1,"outcome":"win2"},{"name":"Matheus Oliveira","g1":1,"g2":1,"outcome":"draw"},{"name":"Maurício Correa","g1":1,"g2":2,"outcome":"win2"},{"name":"Paulo Mattos","g1":2,"g2":1,"outcome":"win1"},{"name":"Pier Pesce","g1":1,"g2":2,"outcome":"win2"},{"name":"Rafaella Linares","g1":2,"g2":2,"outcome":"draw"},{"name":"Renato Pellicci","g1":1,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Roberta Pereira","g1":0,"g2":2,"outcome":"win2"},{"name":"Rodrigo Curiele","g1":2,"g2":1,"outcome":"win1"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":1,"g2":2,"outcome":"win2"},{"name":"Thiago Cabido","g1":1,"g2":2,"outcome":"win2"},{"name":"Valdemiro Neto","g1":2,"g2":1,"outcome":"win1"}]},{"idx":30,"slot":0,"stage":"terceiro","stageName":"Terceiro","mult":2.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":19,"draw":0,"win2":18,"total":37,"scores":[{"score":"1-2","count":7},{"score":"2-1","count":7},{"score":"0-2","count":5},{"score":"2-0","count":4},{"score":"0-1","count":3},{"score":"3-1","count":3},{"score":"3-0","count":2},{"score":"1-0","count":2}],"people":[{"name":"Allan Roitman","g1":1,"g2":2,"outcome":"win2"},{"name":"Augusto Passos","g1":1,"g2":2,"outcome":"win2"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":0,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":0,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":1,"g2":3,"outcome":"win2"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":0,"g2":1,"outcome":"win2"},{"name":"Edison Terra","g1":1,"g2":2,"outcome":"win2"},{"name":"Eduardo Camelyer","g1":2,"g2":3,"outcome":"win2"},{"name":"Eduardo Ivo","g1":2,"g2":1,"outcome":"win1"},{"name":"Eduardo Perez","g1":3,"g2":0,"outcome":"win1"},{"name":"Fabio Santos","g1":0,"g2":2,"outcome":"win2"},{"name":"Fabio de Andre Sant'Ana","g1":1,"g2":0,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":0,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":1,"g2":2,"outcome":"win2"},{"name":"Gustavo Reichembach","g1":3,"g2":2,"outcome":"win1"},{"name":"Igor Reis","g1":3,"g2":1,"outcome":"win1"},{"name":"Leonardo Braga","g1":1,"g2":2,"outcome":"win2"},{"name":"Leticia Martins","g1":2,"g2":1,"outcome":"win1"},{"name":"Lucas Palhares","g1":0,"g2":2,"outcome":"win2"},{"name":"Marcelo Neves","g1":3,"g2":1,"outcome":"win1"},{"name":"Matheus Oliveira","g1":2,"g2":1,"outcome":"win1"},{"name":"Maurício Correa","g1":3,"g2":1,"outcome":"win1"},{"name":"Paulo Mattos","g1":0,"g2":2,"outcome":"win2"},{"name":"Pier Pesce","g1":0,"g2":1,"outcome":"win2"},{"name":"Rafaella Linares","g1":0,"g2":2,"outcome":"win2"},{"name":"Renato Pellicci","g1":0,"g2":2,"outcome":"win2"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":1,"g2":0,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":2,"g2":4,"outcome":"win2"},{"name":"Ronny Lubinski","g1":1,"g2":2,"outcome":"win2"},{"name":"Sergio Marcondes","g1":3,"g2":0,"outcome":"win1"},{"name":"Thiago Cabido","g1":2,"g2":0,"outcome":"win1"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]},{"idx":31,"slot":0,"stage":"final","stageName":"Final","mult":3.0,"date":"","t1":"Indefinido","t2":"Indefinido","win1":25,"draw":6,"win2":6,"total":37,"scores":[{"score":"2-1","count":14},{"score":"1-2","count":4},{"score":"3-2","count":4},{"score":"1-1","count":3},{"score":"3-1","count":3},{"score":"2-2","count":3},{"score":"4-1","count":1},{"score":"1-0","count":1}],"people":[{"name":"Allan Roitman","g1":1,"g2":1,"outcome":"draw"},{"name":"Augusto Passos","g1":2,"g2":1,"outcome":"win1"},{"name":"Bernardo Ribeiro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Cestaro","g1":2,"g2":1,"outcome":"win1"},{"name":"Bruno Mizuno","g1":2,"g2":1,"outcome":"win1"},{"name":"Carlos Eduardo","g1":2,"g2":1,"outcome":"win1"},{"name":"Cirilo Vieira","g1":3,"g2":1,"outcome":"win1"},{"name":"Claudio Nonato","g1":2,"g2":1,"outcome":"win1"},{"name":"Danilo Gonsalves","g1":2,"g2":1,"outcome":"win1"},{"name":"Edgar Muzzio","g1":1,"g2":2,"outcome":"win2"},{"name":"Edison Terra","g1":3,"g2":1,"outcome":"win1"},{"name":"Eduardo Camelyer","g1":4,"g2":1,"outcome":"win1"},{"name":"Eduardo Ivo","g1":1,"g2":0,"outcome":"win1"},{"name":"Eduardo Perez","g1":1,"g2":1,"outcome":"draw"},{"name":"Fabio Santos","g1":3,"g2":2,"outcome":"win1"},{"name":"Fabio de Andre Sant'Ana","g1":2,"g2":1,"outcome":"win1"},{"name":"Guilherme Majzoub","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Checcucci","g1":2,"g2":1,"outcome":"win1"},{"name":"Gustavo Reichembach","g1":4,"g2":3,"outcome":"win1"},{"name":"Igor Reis","g1":1,"g2":1,"outcome":"draw"},{"name":"Leonardo Braga","g1":2,"g2":1,"outcome":"win1"},{"name":"Leticia Martins","g1":3,"g2":2,"outcome":"win1"},{"name":"Lucas Palhares","g1":1,"g2":2,"outcome":"win2"},{"name":"Marcelo Neves","g1":2,"g2":2,"outcome":"draw"},{"name":"Matheus Oliveira","g1":1,"g2":2,"outcome":"win2"},{"name":"Maurício Correa","g1":2,"g2":2,"outcome":"draw"},{"name":"Paulo Mattos","g1":3,"g2":0,"outcome":"win1"},{"name":"Pier Pesce","g1":2,"g2":1,"outcome":"win1"},{"name":"Rafaella Linares","g1":3,"g2":2,"outcome":"win1"},{"name":"Renato Pellicci","g1":2,"g2":2,"outcome":"draw"},{"name":"Ricardo Martins","g1":1,"g2":2,"outcome":"win2"},{"name":"Roberta Pereira","g1":3,"g2":1,"outcome":"win1"},{"name":"Rodrigo Curiele","g1":1,"g2":3,"outcome":"win2"},{"name":"Ronny Lubinski","g1":2,"g2":1,"outcome":"win1"},{"name":"Sergio Marcondes","g1":2,"g2":1,"outcome":"win1"},{"name":"Thiago Cabido","g1":3,"g2":2,"outcome":"win1"},{"name":"Valdemiro Neto","g1":0,"g2":1,"outcome":"win2"}]}],"bracket":{"oitavas":[{"slot":0,"feeds":[1,4],"date":"04/07"},{"slot":1,"feeds":[0,2],"date":"04/07"},{"slot":2,"feeds":[3,5],"date":"05/07"},{"slot":3,"feeds":[6,9],"date":"05/07"},{"slot":4,"feeds":[10,11],"date":"06/07"},{"slot":5,"feeds":[7,8],"date":"06/07"},{"slot":6,"feeds":[12,13],"date":"07/07"},{"slot":7,"feeds":[14,15],"date":"07/07"}],"quartas":[{"slot":0,"feeds_oitavas":[0,1],"date":"09/07"},{"slot":1,"feeds_oitavas":[4,5],"date":"10/07"},{"slot":2,"feeds_oitavas":[2,3],"date":"11/07"},{"slot":3,"feeds_oitavas":[6,7],"date":"11/07"}],"semifinal":[{"slot":0,"feeds_quartas":[0,1],"date":"14/07"},{"slot":1,"feeds_quartas":[2,3],"date":"15/07"}],"terceiro":[{"slot":0,"feeds_semi_losers":[0,1],"date":"18/07"}],"final":[{"slot":0,"feeds_semi":[0,1],"date":"19/07"}]},"champions":{"França":16,"Espanha":10,"Portugal":5,"Inglaterra":3,"Brasil":2,"Holanda":1},"champPeople":{"Brasil":["Lucas Palhares","Ricardo Martins"],"Espanha":["Eduardo Ivo","Valdemiro Neto","Rodrigo Curiele","Pier Pesce","Carlos Eduardo","Bernardo Ribeiro","Fabio de Andre Sant'Ana","Matheus Oliveira","Sergio Marcondes","Gustavo Checcucci"],"França":["Rafaella Linares","Augusto Passos","Fabio Santos","Guilherme Majzoub","Eduardo Camelyer","Renato Pellicci","Roberta Pereira","Allan Roitman","Edison Terra","Bruno Mizuno","Cirilo Vieira","Claudio Nonato","Thiago Cabido","Ronny Lubinski","Paulo Mattos","Rafael Pellicciotta"],"Holanda":["Danilo Gonsalves"],"Inglaterra":["Leonardo Braga","Igor Reis","Edgar Muzzio"],"Portugal":["Marcelo Neves","Leticia Martins","Bruno Cestaro","Maurício Correa","Gustavo Reichembach"]},"phase1Totals":{"Allan Roitman":305,"Augusto Passos":272,"Bernardo Ribeiro":321,"Bruno Cestaro":300,"Bruno Mizuno":299,"Carlos Eduardo":266,"Cirilo Vieira":267,"Claudio Nonato":286,"Danilo Gonsalves":307,"Edgar Muzzio":253,"Edison Terra":340,"Eduardo Camelyer":284,"Eduardo Ivo":339,"Eduardo Perez":323,"Fabio Santos":258,"Fabio de Andre Sant'Ana":292,"Guilherme Majzoub":308,"Gustavo Checcucci":316,"Gustavo Reichembach":284,"Igor Reis":275,"Leonardo Braga":295,"Leticia Martins":317,"Lucas Palhares":319,"Marcelo Neves":302,"Matheus Oliveira":321,"Maurício Correa":307,"Paulo Mattos":264,"Pier Pesce":296,"Rafael Pellicciotta":254,"Rafaella Linares":309,"Renato Pellicci":292,"Ricardo Martins":318,"Roberta Pereira":355,"Rodrigo Curiele":318,"Ronny Lubinski":293,"Sergio Marcondes":318,"Thiago Cabido":293,"Valdemiro Neto":291}};
-
-const FLAG={'México':'🇲🇽','África do Sul':'🇿🇦','Coreia do Sul':'🇰🇷','República Tcheca':'🇨🇿','Canadá':'🇨🇦','Bósnia':'🇧🇦','Catar':'🇶🇦','Suíça':'🇨🇭','Brasil':'🇧🇷','Marrocos':'🇲🇦','Haiti':'🇭🇹','Escócia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿','Estados Unidos':'🇺🇸','Paraguai':'🇵🇾','Austrália':'🇦🇺','Turquia':'🇹🇷','Alemanha':'🇩🇪','Curaçao':'🇨🇼','Costa do Marfim':'🇨🇮','Equador':'🇪🇨','Holanda':'🇳🇱','Japão':'🇯🇵','Suécia':'🇸🇪','Tunísia':'🇹🇳','Bélgica':'🇧🇪','Egito':'🇪🇬','Irã':'🇮🇷','Nova Zelândia':'🇳🇿','Espanha':'🇪🇸','Cabo Verde':'🇨🇻','Arábia Saudita':'🇸🇦','Uruguai':'🇺🇾','França':'🇫🇷','Senegal':'🇸🇳','Iraque':'🇮🇶','Noruega':'🇳🇴','Argentina':'🇦🇷','Argélia':'🇩🇿','Áustria':'🇦🇹','Jordânia':'🇯🇴','Portugal':'🇵🇹','RD Congo':'🇨🇩','Uzbequistão':'🇺🇿','Colômbia':'🇨🇴','Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Croácia':'🇭🇷','Gana':'🇬🇭','Panamá':'🇵🇦'};
-const AVATAR_COLORS=['#3b82f6','#f59e0b','#10b981','#8b5cf6','#ef4444','#ec4899','#06b6d4','#84cc16'];
-
-const allMatches = DATA.allMatches;
-const champions  = DATA.champions;
-const champPeople= DATA.champPeople;
-const phase1Totals=DATA.phase1Totals;
-
-// Multipliers by stage
-const STAGE_MULT={'16avos':1.5,'oitavas':1.5,'quartas':2,'semifinal':2,'terceiro':2,'final':3};
-const CHAMP_BONUS=50;
-// Set to the real World Cup champion once known (e.g. 'Brasil') to activate +50 bonus
-const REAL_CHAMPION=null;
-
-const bracket     = DATA.bracket;
-
-// dynamicTeams[stageKey][slot] = {t1, t2} — computed from results in real time
-// stageKey: 'oitavas', 'quartas', 'semifinal', 'terceiro', 'final'
-let dynamicTeams = {};
-
-function winner(real_g1, real_g2, t1, t2, pens){
-  if(real_g1 > real_g2) return t1;
-  if(real_g2 > real_g1) return t2;
-  // Draw: check penalty winner
-  if(pens===t1||pens===t2) return pens;
-  return null;
-}
-
-function computeAdvancement(){
-  dynamicTeams = {oitavas:{}, quartas:{}, semifinal:{}, terceiro:{}, final:{}};
-  const matches16 = allMatches.filter(m=>m.stage==='16avos');
-  const matchesOit= allMatches.filter(m=>m.stage==='oitavas');
-  const matchesQrt= allMatches.filter(m=>m.stage==='quartas');
-  const matchesSem= allMatches.filter(m=>m.stage==='semifinal');
-
-  // 16avos -> oitavas
-  bracket.oitavas.forEach(oit=>{
-    const [s1, s2] = oit.feeds;
-    const r1 = results[String(s1)], r2 = results[String(s2)];
-    const m1 = matches16[s1], m2 = matches16[s2];
-    const w1 = r1 ? winner(parseInt(r1.g1), parseInt(r1.g2), m1.t1, m1.t2, r1.pens||'') : null;
-    const w2 = r2 ? winner(parseInt(r2.g1), parseInt(r2.g2), m2.t1, m2.t2, r2.pens||'') : null;
-    dynamicTeams.oitavas[oit.slot] = {
-      t1: w1 || `Venc. ${m1.t1.split(' ')[0]}/${m1.t2.split(' ')[0]}`,
-      t2: w2 || `Venc. ${m2.t1.split(' ')[0]}/${m2.t2.split(' ')[0]}`,
-      t1Known: !!w1, t2Known: !!w2
-    };
-  });
-
-  // oitavas -> quartas (oitavas slots are idx 16-23 in allMatches)
-  const oitavasOffset = matches16.length; // 16
-  bracket.quartas.forEach(qrt=>{
-    const [os1, os2] = qrt.feeds_oitavas;
-    const ro1 = results[String(oitavasOffset + os1)];
-    const ro2 = results[String(oitavasOffset + os2)];
-    const dt1 = dynamicTeams.oitavas[os1] || {};
-    const dt2 = dynamicTeams.oitavas[os2] || {};
-    const w1 = ro1 ? winner(parseInt(ro1.g1), parseInt(ro1.g2), dt1.t1||'?', dt1.t2||'?', ro1.pens||'') : null;
-    const w2 = ro2 ? winner(parseInt(ro2.g1), parseInt(ro2.g2), dt2.t1||'?', dt2.t2||'?', ro2.pens||'') : null;
-    dynamicTeams.quartas[qrt.slot] = {
-      t1: w1 || (dt1.t1Known&&dt1.t2Known ? `Venc. Oit.${os1+1}` : 'Indefinido'),
-      t2: w2 || (dt2.t1Known&&dt2.t2Known ? `Venc. Oit.${os2+1}` : 'Indefinido'),
-      t1Known: !!w1, t2Known: !!w2
-    };
-  });
-
-  // quartas -> semifinal
-  const qrtOffset = oitavasOffset + matchesOit.length; // 16+8=24
-  bracket.semifinal.forEach(semi=>{
-    const [qs1, qs2] = semi.feeds_quartas;
-    const rq1 = results[String(qrtOffset + qs1)];
-    const rq2 = results[String(qrtOffset + qs2)];
-    const dq1 = dynamicTeams.quartas[qs1] || {};
-    const dq2 = dynamicTeams.quartas[qs2] || {};
-    const w1 = rq1 ? winner(parseInt(rq1.g1), parseInt(rq1.g2), dq1.t1||'?', dq1.t2||'?', rq1.pens||'') : null;
-    const w2 = rq2 ? winner(parseInt(rq2.g1), parseInt(rq2.g2), dq2.t1||'?', dq2.t2||'?', rq2.pens||'') : null;
-    dynamicTeams.semifinal[semi.slot] = {
-      t1: w1 || 'Indefinido', t2: w2 || 'Indefinido',
-      t1Known: !!w1, t2Known: !!w2
-    };
-  });
-
-  // semifinal -> final and terceiro
-  const semiOffset = qrtOffset + matchesQrt.length; // 24+4=28
-  const rs0 = results[String(semiOffset)], rs1 = results[String(semiOffset+1)];
-  const ds0 = dynamicTeams.semifinal[0]||{}, ds1 = dynamicTeams.semifinal[1]||{};
-  const sw0t1 = rs0 ? winner(parseInt(rs0.g1),parseInt(rs0.g2),ds0.t1||'?',ds0.t2||'?',rs0.pens||'') : null;
-  const sw0t2 = rs0 ? (sw0t1===ds0.t1 ? ds0.t2 : ds0.t1) : null; // loser
-  const sw1t1 = rs1 ? winner(parseInt(rs1.g1),parseInt(rs1.g2),ds1.t1||'?',ds1.t2||'?',rs1.pens||'') : null;
-  const sw1t2 = rs1 ? (sw1t1===ds1.t1 ? ds1.t2 : ds1.t1) : null; // loser
-  dynamicTeams.final[0] = {
-    t1: sw0t1||'Indefinido', t2: sw1t1||'Indefinido',
-    t1Known:!!sw0t1, t2Known:!!sw1t1
-  };
-  dynamicTeams.terceiro[0] = {
-    t1: sw0t2||'Indefinido', t2: sw1t2||'Indefinido',
-    t1Known:!!sw0t2, t2Known:!!sw1t2
-  };
-}
-
-function getTeamsForMatch(m){
-  // For 16avos: teams are fixed (from data)
-  if(m.stage==='16avos') return {t1:m.t1, t2:m.t2, t1Known:true, t2Known:true};
-  // For other stages: look up dynamicTeams
-  const dt = (dynamicTeams[m.stage]||{})[m.slot];
-  if(dt) return dt;
-  return {t1:'Indefinido', t2:'Indefinido', t1Known:false, t2Known:false};
-}
-
-// Stage display names
-const STAGE_NAMES={'16avos':'16-avos','oitavas':'Oitavas','quartas':'Quartas','semifinal':'Semifinal','terceiro':'3º Lugar','final':'Final'};
-const STAGE_ORDER=['16avos','oitavas','quartas','semifinal','terceiro','final'];
-
-// Google Sheets URLs
-// gid=0 is group stage sheet — Mata-mata uses a NEW sheet tab
-// Mata-mata sheet tab (gid=572467846)
-const SHEETS_BASE='https://docs.google.com/spreadsheets/d/e/2PACX-1vQj5p44wM4Gv3obXkUtSDrGn4UMgE22yj0dpdY6WfJTqG3ePG0gQWv4y-ufGfUAXeFbVmu2Yg89egsK/pub';
-const SHEETS_READ_URL=SHEETS_BASE+'?gid=572467846&single=true&output=csv';
-// Apps Script Web App URL for writing — you'll paste this after deploying the script
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbxyYQ2fTzhtOmB8HXA8qAtaS1Hy3TGPHeyh7r_cpnUqUwjtATj5gY6ZnD0-TpPI54zp/exec';
-
-let currentStage='todos';
-let expandedCard=null;
-let activeScorePill=null;
-// results: key = match idx (string), value = {g1, g2}
-let results = JSON.parse(localStorage.getItem('bolao2026_mata2_results')||'{}');
-
-function saveLocal(){localStorage.setItem('bolao2026_mata2_results',JSON.stringify(results));}
-
-/* ── FETCH FROM SHEETS ── */
-async function fetchResults(){
-  try{
-    const resp=await fetch(SHEETS_READ_URL+'&cb='+Date.now());
-    const text=await resp.text();
-    const lines=text.trim().split('\n').slice(1);
-    lines.forEach((line,i)=>{
-      const cols=line.split(',');
-      const g1=(cols[1]||'').trim();
-      const g2=(cols[2]||'').trim();
-      const pens=(cols[4]||'').trim();
-      if(g1!==''&&g2!=='') results[String(i)]={g1,g2,pens};
-    });
-    saveLocal();
-    return true;
-  }catch(e){console.error(e);return false;}
-}
-
-async function fetchAndRender(){
-  const fb=document.getElementById('saveFeedback');
-  fb.className='save-feedback sf-ok';fb.textContent='⏳ Buscando...';fb.style.opacity='1';
-  const ok=await fetchResults();
-  fb.textContent=ok?'✓ Dados carregados!':'⚠️ Erro ao buscar';
-  fb.className='save-feedback '+(ok?'sf-ok':'sf-err');
-  setTimeout(()=>fb.style.opacity='0',2500);
-  renderResults();
-  if(document.getElementById('tab-rank').classList.contains('active')) renderRank();
-}
-
-/* ── SAVE + PUSH TO SHEETS ── */
-async function saveAndPush(){
-  // 1. Read all inputs and update results
-  allMatches.forEach((m,i)=>{
-    const g1el=document.getElementById('ri-'+i+'-1');
-    const g2el=document.getElementById('ri-'+i+'-2');
-    const pensEl=document.getElementById('ri-'+i+'-pens');
-    if(!g1el||!g2el) return;
-    if(g1el.value!==''&&g2el.value!==''){
-      const g1=g1el.value, g2=g2el.value;
-      const pens=pensEl?pensEl.value:'';
-      results[String(i)]={g1,g2,pens};
-    } else if(g1el.value===''&&g2el.value==='') delete results[String(i)];
-  });
-  saveLocal();
-  renderResults();
-  if(document.getElementById('tab-rank').classList.contains('active')) renderRank();
-
-  const fb=document.getElementById('saveFeedback');
-
-  // 2. Push to Google Sheets via Apps Script Web App
-  if(APPS_SCRIPT_URL==='APPS_SCRIPT_PLACEHOLDER'){
-    fb.className='save-feedback sf-ok';
-    fb.textContent='✓ Salvo localmente (Apps Script não configurado ainda)';
-    fb.style.opacity='1';
-    setTimeout(()=>fb.style.opacity='0',3000);
-    return;
-  }
-
-  fb.className='save-feedback sf-ok';fb.textContent='⏳ Enviando para planilha...';fb.style.opacity='1';
-  try{
-    // Build rows array: index -> [g1, g2]
-    const rows=allMatches.map((m,i)=>{
-      const r=results[String(i)];
-      return r?[r.g1,r.g2,r.pens||'']:['','',''];
-    });
-    // no-cors required when calling Apps Script from external domain
-    await fetch(APPS_SCRIPT_URL,{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({rows})
-    });
-    fb.textContent='✓ Planilha atualizada!';
-    fb.className='save-feedback sf-ok';
-  }catch(e){
-    fb.textContent='⚠️ Erro ao enviar para planilha';
-    fb.className='save-feedback sf-err';
-    console.error(e);
-  }
-  setTimeout(()=>fb.style.opacity='0',3000);
-}
-
-/* ── TAB SWITCH ── */
-function showTab(name,btn){
-  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(btn) btn.classList.add('active');
-  if(name==='jogos') renderMatches();
-  if(name==='campeao') renderChamps();
-  if(name==='resultados') fetchAndRender();
-  if(name==='rank') fetchResults().then(()=>renderRank());
-  if(name==='stats') renderStats();
-  if(name==='pessoa') renderPersons();
-}
-
-/* ── STAGE FILTER ── */
-function initStageFilter(){
-  const el=document.getElementById('stageFilter');
-  const stages=['todos',...STAGE_ORDER];
-  stages.forEach(s=>{
-    const btn=document.createElement('button');
-    btn.className='sfilter'+(s==='todos'?' active':'');
-    btn.textContent=s==='todos'?'Todos':STAGE_NAMES[s]||s;
-    btn.onclick=()=>{
-      currentStage=s;
-      document.querySelectorAll('.sfilter').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      renderMatches();
-    };
-    el.appendChild(btn);
-  });
-}
-
-/* ── JOGOS ── */
-function renderMatches(){
-  computeAdvancement();
-  const grid=document.getElementById('matchesGrid');
-  const filtered=currentStage==='todos'?allMatches:allMatches.filter(m=>m.stage===currentStage);
-  grid.innerHTML='';
-  filtered.forEach(m=>grid.appendChild(buildMatchCard(m)));
-}
-
-function buildMatchCard(m){
-  const card=document.createElement('div');
-  card.className='match-card';
-  const total=m.total;
-  const p1=total>0?Math.round(m.win1/total*100):0;
-  const pd=total>0?Math.round(m.draw/total*100):0;
-  const p2=100-p1-pd;
-  // Get real/dynamic team names from bracket propagation
-  const teams=getTeamsForMatch(m);
-  const t1=teams.t1, t2=teams.t2;
-  const f1=FLAG[t1]||(teams.t1Known&&t1!=='Indefinido'?'🏳️':'');
-  const f2=FLAG[t2]||(teams.t2Known&&t2!=='Indefinido'?'🏳️':'');
-  const t1style=teams.t1Known?'color:var(--blue)':'color:var(--muted);font-size:12px;font-style:italic';
-  const t2style=teams.t2Known?'color:var(--red)':'color:var(--muted);font-size:12px;font-style:italic';
-  const byOutcome={win1:m.people.filter(p=>p.outcome==='win1'),draw:m.people.filter(p=>p.outcome==='draw'),win2:m.people.filter(p=>p.outcome==='win2')};
-  const scoreHTML=m.scores.map((s,si)=>`<div class="score-pill" data-si="${si}"><span class="sc">${s.score}</span><span class="scn">${s.count}x</span></div>`).join('');
-  const stagePillClass='pill-'+m.stage;
-
-  card.innerHTML=`
-    <div class="match-header">
-      <span class="stage-tag ${stagePillClass}">${STAGE_NAMES[m.stage]||m.stage}</span>
-      <span class="mult-tag">×${m.mult}</span>
-      ${m.date?`<span class="date-tag">${m.date}</span>`:''}
-      <span style="font-size:12px;color:var(--muted);margin-left:auto">${total} palpites</span>
-    </div>
-    <div class="teams-row">
-      <div class="team-name" style="${t1style}">${f1} ${t1}</div>
-      <div class="vs">x</div>
-      <div class="team-name" style="${t2style}">${f2} ${t2}</div>
-    </div>
-    <div class="distribution">
-      <div class="dist-labels"><span style="${t1style}">${t1.split(' ')[0]} vence</span><span>Empate</span><span style="${t2style}">${t2.split(' ')[0]} vence</span></div>
-      <div class="dist-bar-wrap">
-        ${p1>0?`<div class="dist-seg win1" style="width:${p1}%" data-seg="win1">${p1>=15?p1+'%':''}</div>`:''}
-        ${pd>0?`<div class="dist-seg draw" style="width:${pd}%" data-seg="draw">${pd>=15?pd+'%':''}</div>`:''}
-        ${p2>0?`<div class="dist-seg win2" style="width:${p2}%" data-seg="win2">${p2>=15?p2+'%':''}</div>`:''}
-      </div>
-      <div class="dist-counts">
-        <span class="dist-cnt win1c" data-seg="win1">${m.win1} (${p1}%)</span>
-        <span class="dist-cnt drawc" data-seg="draw">${m.draw} (${pd}%)</span>
-        <span class="dist-cnt win2c" data-seg="win2">${m.win2} (${p2}%)</span>
-      </div>
-    </div>
-    <div class="bar-who"><div class="bar-who-title"></div><div class="bar-who-names"></div></div>
-    <div class="expand-hint">▼ Ver todos os palpites</div>
-    <div class="match-details">
-      <div class="detail-section-title">Placares mais apostados <span style="color:var(--muted);font-weight:400;text-transform:none;font-size:10px">(clique para ver quem apostou)</span></div>
-      <div class="scores-list">${scoreHTML}</div>
-      <div class="score-who"><div class="score-who-title"></div><div class="score-who-names"></div></div>
-      <div class="detail-section-title" style="margin-top:10px">Todos os palpites — Time 1 (azul) × Time 2 (vermelho)</div>
-      <div class="people-columns">
-        ${m.people.map(p=>`<div class="person-row outcome-${p.outcome}"><div class="dot"></div><div class="pname">${p.name}</div><div class="pscore">${p.g1}-${p.g2}</div></div>`).join('')}
-      </div>
-    </div>`;
-
-  const barWrap=card.querySelector('.dist-bar-wrap');
-  const bw=card.querySelector('.bar-who'),bwt=card.querySelector('.bar-who-title'),bwn=card.querySelector('.bar-who-names');
-  const det=card.querySelector('.match-details'),hint=card.querySelector('.expand-hint');
-  const scoreWho=card.querySelector('.score-who'),scoreWhoT=card.querySelector('.score-who-title'),scoreWhoN=card.querySelector('.score-who-names');
-  const allSegs=()=>card.querySelectorAll('.dist-seg');
-  const allCnts=()=>card.querySelectorAll('.dist-cnt');
-
-  function activateSeg(seg){
-    allSegs().forEach(s=>{s.classList.remove('seg-active','seg-dim');s.classList.add(s.dataset.seg===seg?'seg-active':'seg-dim');});
-    allCnts().forEach(c=>c.classList.toggle('cnt-active',c.dataset.seg===seg));
-    const people=byOutcome[seg]||[];
-    const labelMap={win1:`Time 1 vence`,draw:'Empate',win2:`Time 2 vence`};
-    const tagClass={win1:'tag-win1',draw:'tag-draw',win2:'tag-win2'};
-    bwt.className='bar-who-title bwt-'+seg;
-    bwt.textContent=`${labelMap[seg]} — ${people.length} apostas`;
-    bwn.innerHTML=people.map(p=>`<span class="bar-who-tag ${tagClass[seg]}">${p.name}</span>`).join('');
-    bw.classList.add('open');
-  }
-  function deactivateSeg(){allSegs().forEach(s=>s.classList.remove('seg-active','seg-dim'));allCnts().forEach(c=>c.classList.remove('cnt-active'));bw.classList.remove('open');}
-
-  let currentSeg=null;
-  barWrap.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    const t=e.target.closest('.dist-seg');
-    if(!t) return;
-    const seg=t.dataset.seg;
-    if(currentSeg===seg){currentSeg=null;deactivateSeg();}else{currentSeg=seg;activateSeg(seg);}
-  });
-  allCnts().forEach(cnt=>cnt.addEventListener('click',(e)=>{
-    e.stopPropagation();
-    const seg=cnt.dataset.seg;
-    if(currentSeg===seg){currentSeg=null;deactivateSeg();}else{currentSeg=seg;activateSeg(seg);}
-  }));
-  card.querySelectorAll('.score-pill').forEach((pill,si)=>{
-    pill.addEventListener('click',(e)=>{
-      e.stopPropagation();
-      const score=m.scores[si];
-      const [sg1,sg2]=score.score.split('-').map(Number);
-      const people=m.people.filter(p=>p.g1===sg1&&p.g2===sg2);
-      if(activeScorePill===pill&&scoreWho.classList.contains('open')){scoreWho.classList.remove('open');pill.classList.remove('active-pill');activeScorePill=null;return;}
-      if(activeScorePill) activeScorePill.classList.remove('active-pill');
-      activeScorePill=pill;pill.classList.add('active-pill');
-      scoreWhoT.textContent=`Placar ${score.score} — ${people.length} pessoa${people.length!==1?'s':''}`;
-      scoreWhoN.innerHTML=people.map(p=>`<span class="score-who-tag">${p.name}</span>`).join('');
-      scoreWho.classList.add('open');
-    });
-  });
-  card.addEventListener('click',()=>{
-    const isOpen=det.classList.contains('open');
-    if(expandedCard&&expandedCard!==card){
-      expandedCard.querySelector('.match-details').classList.remove('open');
-      expandedCard.classList.remove('expanded');
-      expandedCard.querySelector('.expand-hint').textContent='▼ Ver todos os palpites';
-    }
-    if(!isOpen){det.classList.add('open');card.classList.add('expanded');hint.textContent='▲ Fechar palpites';expandedCard=card;}
-    else{det.classList.remove('open');card.classList.remove('expanded');hint.textContent='▼ Ver todos os palpites';expandedCard=null;}
-  });
-  return card;
-}
-
-/* ── CAMPEÃO ── */
-function renderChamps(){
-  const grid=document.getElementById('champGrid');
-  grid.innerHTML='';
-  const maxV=Math.max(...Object.values(champions));
-  Object.entries(champions).sort((a,b)=>b[1]-a[1]).forEach(([team,count])=>{
-    const pct=Math.round(count/38*100),barW=Math.round(count/maxV*100);
-    const people=champPeople[team]||[];
-    const isChamp=REAL_CHAMPION&&team===REAL_CHAMPION;
-    const card=document.createElement('div');
-    card.className='champ-card';
-    card.style.border=isChamp?'1px solid var(--gold)':'1px solid var(--border)';
-    card.innerHTML=`
-      <div class="champ-card-header">
-        <div class="champ-flag">${FLAG[team]||'🏳️'}${isChamp?' 🏆':''}</div>
-        <div><div class="champ-team">${team}</div><div class="champ-count">${count} apostas · ${pct}% do bolão${isChamp?' · <strong style="color:var(--gold)">CAMPEÃO!</strong>':''}</div></div>
-      </div>
-      <div class="champ-bar-wrap"><div class="champ-bar-bg"><div class="champ-bar-fill" style="width:${barW}%"></div></div></div>
-      <div class="champ-names">${people.map(p=>`<span class="champ-name-tag">${p.split(' ')[0]}</span>`).join('')}</div>`;
-    grid.appendChild(card);
-  });
-}
-
-/* ── RESULTADOS ── */
-function renderResults(){
-  computeAdvancement();
-  const el=document.getElementById('resultTable');
-  const doneCount=Object.keys(results).length;
-  let html=`<div style="font-size:13px;color:var(--text2);margin-bottom:14px">${doneCount} de ${allMatches.length} jogos com resultado registrado</div>`;
-  html+='<table class="result-table"><thead><tr><th>#</th><th>Fase</th><th>Time 1</th><th>Placar</th><th>Pênaltis</th><th>Time 2</th><th>Mult.</th><th>Status</th></tr></thead><tbody>';
-
-  allMatches.forEach((m,i)=>{
-    const r=results[String(i)];
-    const isDone=r&&r.g1!==''&&r.g2!=='';
-    const teams=getTeamsForMatch(m);
-    const t1=teams.t1, t2=teams.t2;
-    const f1=FLAG[t1]||(teams.t1Known&&t1!=='Indefinido'?'🏳️':'');
-    const f2=FLAG[t2]||(teams.t2Known&&t2!=='Indefinido'?'🏳️':'');
-    const stagePillClass='pill-'+m.stage;
-    // Show penalty selector only for draws in knockout (all stages)
-    const isDraw=isDone&&r.g1===r.g2;
-    const pensVal=r?r.pens:'';
-    const pensCell=isDraw
-      ? `<select id="ri-${i}-pens" style="background:var(--surface2);border:1px solid var(--gold);border-radius:5px;color:var(--gold);padding:4px 6px;font-size:12px;font-weight:700;outline:none">
-          <option value="">⚽ Quem passou?</option>
-          <option value="${t1}" ${pensVal===t1?'selected':''}>${t1}</option>
-          <option value="${t2}" ${pensVal===t2?'selected':''}>${t2}</option>
-        </select>`
-      : `<span style="color:var(--muted);font-size:11px" id="ri-${i}-pens-placeholder">–</span><input type="hidden" id="ri-${i}-pens" value="${pensVal}">`;
-    html+=`<tr>
-      <td style="color:var(--muted);font-size:11px">${i+1}</td>
-      <td><span class="stage-pill ${stagePillClass}">${STAGE_NAMES[m.stage]||m.stage}</span></td>
-      <td class="t1-name" style="max-width:120px">${f1} ${t1}</td>
-      <td><div class="score-input-wrap">
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-1" value="${isDone?r.g1:''}" placeholder="–" oninput="onScoreInput(${i})">
-        <span class="score-sep">×</span>
-        <input class="score-input${isDone?' has-value':''}" type="number" min="0" max="99" id="ri-${i}-2" value="${isDone?r.g2:''}" placeholder="–" oninput="onScoreInput(${i})">
-      </div></td>
-      <td>${pensCell}</td>
-      <td class="t2-name" style="max-width:120px">${f2} ${t2}</td>
-      <td><span class="mult-badge">×${m.mult}</span></td>
-      <td><span class="result-status ${isDone?'status-sheet':'status-pending'}" id="rs-${i}">${isDone?(pensVal?'✓ + Pêns':'✓ Registrado'):'Pendente'}</span></td>
-    </tr>`;
-  });
-  html+='</tbody></table>';
-  el.innerHTML=html;
-}
-
-// Live update pens selector when score changes to a draw
-function onScoreInput(i){
-  const g1el=document.getElementById('ri-'+i+'-1');
-  const g2el=document.getElementById('ri-'+i+'-2');
-  if(!g1el||!g2el||g1el.value===''||g2el.value==='') return;
-  // Short debounce
-  clearTimeout(g1el._t);
-  g1el._t=setTimeout(()=>{
-    // Save current input to results so renderResults picks it up
-    const m=allMatches[i];
-    const teams=getTeamsForMatch(m);
-    const r=results[String(i)]||{};
-    results[String(i)]={g1:g1el.value,g2:g2el.value,pens:r.pens||''};
-    renderResults();
-  },600);
-}
-
-/* ── SCORING ENGINE ── */
-function calcMatchPoints(bet_g1,bet_g2,real_g1,real_g2){
-  // Score-only: does NOT check which teams are playing, only the goals
-  const betOut=bet_g1>bet_g2?'win1':bet_g1===bet_g2?'draw':'win2';
-  const realOut=real_g1>real_g2?'win1':real_g1===real_g2?'draw':'win2';
-  if(bet_g1===real_g1&&bet_g2===real_g2) return{total:10,label:'Placar exato'};
-  if(betOut!==realOut) return{total:0,label:'Resultado errado'};
-  if(realOut==='draw') return{total:7,label:'Empate correto'};
-  const rW=Math.max(real_g1,real_g2),rL=Math.min(real_g1,real_g2);
-  const bW=Math.max(bet_g1,bet_g2),bL=Math.min(bet_g1,bet_g2);
-  if(bW===rW) return{total:7,label:'Gols vencedor'};
-  if(bL===rL) return{total:7,label:'Gols perdedor'};
-  if((bW-bL)===(rW-rL)) return{total:7,label:'Saldo de gols'};
-  return{total:5,label:'Vencedor correto'};
-}
-
-/* ── RANKING ── */
-function computeRanking(){
-  const persons=[...new Set([
-    ...Object.keys(phase1Totals),
-    ...allMatches.flatMap(m=>m.people.map(p=>p.name))
-  ])];
-
-  return persons.map(name=>{
-    const phase1Pts=phase1Totals[name]||0;
-    let phase2Pts=0;
-    const detail=[];
-
-    allMatches.forEach((m,i)=>{
-      const r=results[String(i)];
-      if(!r||r.g1===''||r.g2==='') return;
-      const bet=m.people.find(p=>p.name===name);
-      if(!bet) return;
-      const real_g1=parseInt(r.g1),real_g2=parseInt(r.g2);
-      const res=calcMatchPoints(bet.g1,bet.g2,real_g1,real_g2);
-      const mult=STAGE_MULT[m.stage]||1;
-      const finalPts=Math.round(res.total*mult*10)/10;
-      phase2Pts+=finalPts;
-      detail.push({match:m.t1==='Indefinido'?`${STAGE_NAMES[m.stage]} J${m.slot+1}`:`${m.t1} x ${m.t2}`,bet:`${bet.g1}-${bet.g2}`,real:`${real_g1}-${real_g2}`,pts:finalPts,label:res.label,mult});
-    });
-
-    const champEntry=Object.entries(champPeople).find(([t,ps])=>ps.includes(name));
-    const champTeam=champEntry?champEntry[0]:null;
-    const champBonus=(REAL_CHAMPION&&champTeam===REAL_CHAMPION)?CHAMP_BONUS:0;
-    return{name,phase1Pts,phase2Pts,champBonus,total:phase1Pts+phase2Pts+champBonus,detail,champTeam};
-  }).sort((a,b)=>b.total-a.total||a.name.localeCompare(b.name,'pt-BR'));
-}
-
-function renderRank(){
-  const rc=document.getElementById('rankContent');
-  const ri=document.getElementById('rankInfo');
-  const ranking=computeRanking();
-  const doneCount=Object.keys(results).length;
-
-  ri.innerHTML=
-    `<strong>${doneCount} de ${allMatches.length}</strong> jogos eliminatórios com resultado.`+
-    ` Multiplicadores: 16-avos/oitavas <strong style="color:var(--purple)">×1,5</strong>`+
-    ` · quartas/semi <strong style="color:var(--purple)">×2</strong>`+
-    ` · final <strong style="color:var(--purple)">×3</strong>`+
-    ` · campeão <strong style="color:var(--gold)">+50</strong>`+
-    (REAL_CHAMPION?` · <strong style="color:var(--gold)">Campeão: ${FLAG[REAL_CHAMPION]||''} ${REAL_CHAMPION}</strong>`:` · <span style="color:var(--muted)">campeão ainda não definido</span>`);
-
-  const posColors=['gold','silver','bronze'];
-  let html='<table class="rank-table"><thead><tr>'
-    +'<th>Pos.</th><th>Participante</th><th>Campeão</th>'
-    +'<th>Fase 1</th><th>Fase 2</th>'
-    +(REAL_CHAMPION?'<th>Bônus</th>':'')
-    +'<th>Total</th><th>Recentes (Fase 2)</th>'
-    +'</tr></thead><tbody>';
-
-  let displayPos=1,prev=-1;
-  ranking.forEach((p,i)=>{
-    if(p.total!==prev) displayPos=i+1;
-    prev=p.total;
-    const posClass=displayPos<=3?posColors[displayPos-1]:'';
-    const initials=p.name.split(' ').slice(0,2).map(w=>w[0]).join('');
-    const color=AVATAR_COLORS[p.name.charCodeAt(0)%AVATAR_COLORS.length];
-    const champF=p.champTeam?(FLAG[p.champTeam]||'')+' '+p.champTeam:'–';
-    const hits=p.detail.filter(d=>d.pts>0).slice(-3).reverse();
-    const hitsHTML=hits.length
-      ? hits.map(d=>`<span class="rb-item" title="${d.label} ×${d.mult}">${d.match.split(' x ').map(t=>t.split(' ')[0]).join('×')} <span style="color:#6b7280">${d.bet}</span> <span class="rb-pts">+${d.pts}</span></span>`).join('')
-      : `<span style="color:var(--muted);font-size:11px">sem acertos</span>`;
-
-    html+=`<tr>
-      <td><div class="rank-pos ${posClass}">${displayPos}°</div></td>
-      <td><div style="display:flex;align-items:center;gap:10px">
-        <div class="rank-avatar" style="background:${color}">${initials}</div>
-        <div><div class="rank-name">${p.name}</div></div>
-      </div></td>
-      <td style="font-size:13px;color:var(--text2)">${champF}</td>
-      <td><div class="pts-big pts-blue">${p.phase1Pts}</div></td>
-      <td><div class="pts-big pts-purple">${p.phase2Pts}</div></td>
-      ${REAL_CHAMPION?`<td><div class="pts-big pts-gold">${p.champBonus>0?'+'+p.champBonus:'–'}</div></td>`:''}
-      <td><div class="pts-big pts-gold">${p.total}</div></td>
-      <td><div class="rank-breakdown">${hitsHTML}</div></td>
-    </tr>`;
-  });
-  html+='</tbody></table>';
-  rc.innerHTML=html;
-}
-
-/* ── STATS ── */
-function renderStats(){
-  const sg=document.getElementById('statsGrid'),ff=document.getElementById('funFacts');
-  sg.innerHTML='';ff.innerHTML='';
-  const matches16=allMatches.filter(m=>m.stage==='16avos');
-  const totalBets=matches16.reduce((s,m)=>s+m.total,0);
-  const allScores={};
-  matches16.forEach(m=>m.scores.forEach(s=>{allScores[s.score]=(allScores[s.score]||0)+s.count;}));
-  const topScore=Object.entries(allScores).sort((a,b)=>b[1]-a[1])[0]||['–',0];
-  let mostConsensual=null,maxPct=0;
-  matches16.forEach(m=>{const p=m.total>0?Math.max(m.win1,m.draw,m.win2)/m.total*100:0;if(p>maxPct){maxPct=p;mostConsensual=m;}});
-  [
-    {num:'38',label:'Participantes'},
-    {num:allMatches.length,label:'Jogos no mata-mata'},
-    {num:totalBets.toLocaleString('pt-BR'),label:'Palpites nos 16-avos'},
-    {num:topScore[0],label:`Placar mais apostado nos 16-avos (${topScore[1]}x)`},
-    {num:Math.round(maxPct)+'%',label:`Maior consenso: ${mostConsensual?mostConsensual.t1+' x '+mostConsensual.t2:''}`},
-  ].forEach(s=>{sg.innerHTML+=`<div class="stat-card"><div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div></div>`;});
-
-  const bm=allMatches.filter(m=>m.stage==='16avos'&&(m.t1==='Brasil'||m.t2==='Brasil'));
-  if(bm.length){
-    let bhtml='<div class="detail-section-title" style="margin-bottom:12px">🇧🇷 Palpites do Brasil</div><div class="matches-grid">';
-    bm.forEach(m=>{
-      const t=m.total,p1=t>0?Math.round(m.win1/t*100):0,pd=t>0?Math.round(m.draw/t*100):0,p2=100-p1-pd;
-      bhtml+=`<div class="match-card" style="cursor:default"><div class="match-header"><span class="stage-tag pill-16avos">16-avos</span></div><div class="teams-row"><div class="team-name" style="color:var(--blue)">${FLAG[m.t1]||''} ${m.t1}</div><div class="vs">x</div><div class="team-name" style="color:var(--red)">${FLAG[m.t2]||''} ${m.t2}</div></div><div class="distribution"><div class="dist-bar-wrap">${p1>0?`<div class="dist-seg win1" style="width:${p1}%;cursor:default">${p1>=20?p1+'%':''}</div>`:''} ${pd>0?`<div class="dist-seg draw" style="width:${pd}%;cursor:default">${pd>=20?pd+'%':''}</div>`:''} ${p2>0?`<div class="dist-seg win2" style="width:${p2}%;cursor:default">${p2>=20?p2+'%':''}</div>`:''}</div><div class="dist-counts"><span class="dist-cnt win1c" style="cursor:default">${m.win1} (${p1}%)</span><span class="dist-cnt drawc" style="cursor:default">${m.draw} (${pd}%)</span><span class="dist-cnt win2c" style="cursor:default">${m.win2} (${p2}%)</span></div></div></div>`;
-    });
-    ff.innerHTML=bhtml+'</div>';
-  }
-}
-
-/* ── PESSOA ── */
-function renderPersons(filter=''){
-  const list=document.getElementById('personList');
-  list.innerHTML='';
-  const persons=[...new Set(allMatches.flatMap(m=>m.people.map(p=>p.name)))].sort();
-  const filtered=filter?persons.filter(p=>p.toLowerCase().includes(filter.toLowerCase())):persons;
-  if(!filtered.length){list.innerHTML='<div class="no-results">Nenhum participante encontrado</div>';return;}
-  filtered.forEach(name=>{
-    const initials=name.split(' ').slice(0,2).map(w=>w[0]).join('');
-    const champ=Object.entries(champPeople).find(([t,ps])=>ps.includes(name));
-    const el=document.createElement('div');
-    el.className='person-result';
-    // Group bets by phase
-    let betsHTML='';
-    STAGE_ORDER.forEach(stage=>{
-      const stageBets=allMatches.filter(m=>m.stage===stage).map(m=>{
-        const bet=m.people.find(p=>p.name===name);
-        if(!bet) return null;
-        const label=m.t1==='Indefinido'?`Jogo ${m.slot+1}`:`${m.t1} x ${m.t2}`;
-        return{match:label,score:`${bet.g1}-${bet.g2}`,outcome:bet.outcome};
-      }).filter(Boolean);
-      if(stageBets.length){
-        betsHTML+=`<div class="bet-phase-header">${STAGE_NAMES[stage]||stage} <span class="mult-badge">×${STAGE_MULT[stage]}</span></div>`;
-        betsHTML+=stageBets.map(b=>`<div class="person-bet-row"><span class="bet-match">${b.match}</span><span class="bet-score ${b.outcome}">${b.score}</span></div>`).join('');
-      }
-    });
-    el.innerHTML=`
-      <div class="person-header" onclick="this.nextElementSibling.classList.toggle('open')">
-        <div class="person-avatar">${initials}</div>
-        <div class="person-pname">${name}</div>
-        ${champ?`<span class="person-champ">${FLAG[champ[0]]||''} ${champ[0]}</span>`:''}
-        <span style="font-size:11px;color:var(--muted)">ver palpites ▼</span>
-      </div>
-      <div class="person-bets">${betsHTML}</div>`;
-    list.appendChild(el);
-  });
-}
-function filterPersons(){renderPersons(document.getElementById('personSearch').value);}
-
-// INIT
-initStageFilter();
-renderMatches();
-</script>
+<h1>🏆 Bolão Copa 2026</h1>
+<p class="sub">Ranking parcial — Fase 1 + Fase Eliminatória completa</p>
+<div class="note"><strong>Bônus campeão (+50 pts) não incluído.</strong> Os participantes que acertaram <strong>Espanha</strong> receberão +50 pts adicionais: Eduardo Ivo, Valdemiro Neto, Rodrigo Curiele, Pier Pesce, Carlos Eduardo, Bernardo Ribeiro, Fabio de Andre Sant'Ana, Matheus Oliveira, Sergio Marcondes, Gustavo Checcucci.</div>
+<table>
+<thead>
+  <tr>
+    <th>Pos.</th>
+    <th>Participante</th>
+    <th style="text-align:right">Fase 1</th>
+    <th style="text-align:right">Fase 2</th>
+    <th style="text-align:right">Total</th>
+    <th style="text-align:center">Campeão apostado</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+  <td><span class="pos g">1°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">EI</div>
+    <div><div class="name">Eduardo Ivo</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">339</div></td>
+  <td><div class="pts pts-f2">288.5</div></td>
+  <td><div class="pts pts-tot">627.5</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos s">2°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#8b5cf6">GC</div>
+    <div><div class="name">Gustavo Checcucci</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">316</div></td>
+  <td><div class="pts pts-f2">299.0</div></td>
+  <td><div class="pts pts-tot">615.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos b">3°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#84cc16">RP</div>
+    <div><div class="name">Roberta Pereira</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">355</div></td>
+  <td><div class="pts pts-f2">250.0</div></td>
+  <td><div class="pts pts-tot">605.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">4°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">ET</div>
+    <div><div class="name">Edison Terra</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">340</div></td>
+  <td><div class="pts pts-f2">263.5</div></td>
+  <td><div class="pts pts-tot">603.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">5°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">GM</div>
+    <div><div class="name">Guilherme Majzoub</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">308</div></td>
+  <td><div class="pts pts-f2">293.0</div></td>
+  <td><div class="pts pts-tot">601.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">6°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#ec4899">SM</div>
+    <div><div class="name">Sergio Marcondes</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">318</div></td>
+  <td><div class="pts pts-f2">279.5</div></td>
+  <td><div class="pts pts-tot">597.5</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">7°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">BR</div>
+    <div><div class="name">Bernardo Ribeiro</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">321</div></td>
+  <td><div class="pts pts-f2">275.0</div></td>
+  <td><div class="pts pts-tot">596.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">8°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#84cc16">RC</div>
+    <div><div class="name">Rodrigo Curiele</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">318</div></td>
+  <td><div class="pts pts-f2">272.0</div></td>
+  <td><div class="pts pts-tot">590.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">9°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">LP</div>
+    <div><div class="name">Lucas Palhares</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">319</div></td>
+  <td><div class="pts pts-f2">263.5</div></td>
+  <td><div class="pts pts-tot">582.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Brasil</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">10°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">AR</div>
+    <div><div class="name">Allan Roitman</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">305</div></td>
+  <td><div class="pts pts-f2">268.0</div></td>
+  <td><div class="pts pts-tot">573.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">11°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">CN</div>
+    <div><div class="name">Claudio Nonato</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">286</div></td>
+  <td><div class="pts pts-f2">285.5</div></td>
+  <td><div class="pts pts-tot">571.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">12°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">FS</div>
+    <div><div class="name">Fabio Santos</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">258</div></td>
+  <td><div class="pts pts-f2">310.0</div></td>
+  <td><div class="pts pts-tot">568.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">13°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">LM</div>
+    <div><div class="name">Leticia Martins</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">317</div></td>
+  <td><div class="pts pts-f2">250.0</div></td>
+  <td><div class="pts pts-tot">567.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Portugal</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">14°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">Fd</div>
+    <div><div class="name">Fabio de Andre Sant'Ana</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">292</div></td>
+  <td><div class="pts pts-f2">274.5</div></td>
+  <td><div class="pts pts-tot">566.5</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">15°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">AP</div>
+    <div><div class="name">Augusto Passos</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">272</div></td>
+  <td><div class="pts pts-f2">291.5</div></td>
+  <td><div class="pts pts-tot">563.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">15°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#06b6d4">TC</div>
+    <div><div class="name">Thiago Cabido</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">293</div></td>
+  <td><div class="pts pts-f2">270.5</div></td>
+  <td><div class="pts pts-tot">563.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">17°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">RM</div>
+    <div><div class="name">Ricardo Martins</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">318</div></td>
+  <td><div class="pts pts-f2">240.0</div></td>
+  <td><div class="pts pts-tot">558.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Brasil</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">18°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#84cc16">RL</div>
+    <div><div class="name">Ronny Lubinski</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">293</div></td>
+  <td><div class="pts pts-f2">262.5</div></td>
+  <td><div class="pts pts-tot">555.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">19°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#06b6d4">RL</div>
+    <div><div class="name">Rafaella Linares</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">309</div></td>
+  <td><div class="pts pts-f2">239.0</div></td>
+  <td><div class="pts pts-tot">548.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">20°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#06b6d4">RP</div>
+    <div><div class="name">Renato Pellicci</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">292</div></td>
+  <td><div class="pts pts-f2">253.0</div></td>
+  <td><div class="pts pts-tot">545.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">21°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">MC</div>
+    <div><div class="name">Maurício Correa</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">307</div></td>
+  <td><div class="pts pts-f2">235.5</div></td>
+  <td><div class="pts pts-tot">542.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Portugal</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">22°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#ef4444">GR</div>
+    <div><div class="name">Gustavo Reichembach</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">284</div></td>
+  <td><div class="pts pts-f2">257.5</div></td>
+  <td><div class="pts pts-tot">541.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Portugal</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">23°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">EP</div>
+    <div><div class="name">Eduardo Perez</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">323</div></td>
+  <td><div class="pts pts-f2">216.0</div></td>
+  <td><div class="pts pts-tot">539.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">-</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">24°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">LB</div>
+    <div><div class="name">Leonardo Braga</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">295</div></td>
+  <td><div class="pts pts-f2">243.5</div></td>
+  <td><div class="pts pts-tot">538.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Inglaterra</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">24°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">PP</div>
+    <div><div class="name">Pier Pesce</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">296</div></td>
+  <td><div class="pts pts-f2">242.5</div></td>
+  <td><div class="pts pts-tot">538.5</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">26°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#84cc16">BC</div>
+    <div><div class="name">Bruno Cestaro</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">300</div></td>
+  <td><div class="pts pts-f2">234.5</div></td>
+  <td><div class="pts pts-tot">534.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Portugal</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">27°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">CE</div>
+    <div><div class="name">Carlos Eduardo</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">266</div></td>
+  <td><div class="pts pts-f2">266.0</div></td>
+  <td><div class="pts pts-tot">532.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">28°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">MO</div>
+    <div><div class="name">Matheus Oliveira</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">321</div></td>
+  <td><div class="pts pts-f2">204.0</div></td>
+  <td><div class="pts pts-tot">525.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">29°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">DG</div>
+    <div><div class="name">Danilo Gonsalves</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">307</div></td>
+  <td><div class="pts pts-f2">217.5</div></td>
+  <td><div class="pts pts-tot">524.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Holanda</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">30°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#ef4444">MN</div>
+    <div><div class="name">Marcelo Neves</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">302</div></td>
+  <td><div class="pts pts-f2">216.5</div></td>
+  <td><div class="pts pts-tot">518.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Portugal</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">31°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#ef4444">IR</div>
+    <div><div class="name">Igor Reis</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">275</div></td>
+  <td><div class="pts pts-f2">228.0</div></td>
+  <td><div class="pts pts-tot">503.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Inglaterra</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">32°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">EM</div>
+    <div><div class="name">Edgar Muzzio</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">253</div></td>
+  <td><div class="pts pts-f2">242.5</div></td>
+  <td><div class="pts pts-tot">495.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">Inglaterra</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">33°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">BM</div>
+    <div><div class="name">Bruno Mizuno</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">299</div></td>
+  <td><div class="pts pts-f2">193.0</div></td>
+  <td><div class="pts pts-tot">492.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">34°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">VN</div>
+    <div><div class="name">Valdemiro Neto</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">291</div></td>
+  <td><div class="pts pts-f2">194.0</div></td>
+  <td><div class="pts pts-tot">485.0</div></td>
+  <td><div class="bonus-col" style="color:var(--gn)">✓ Espanha +50</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">35°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#10b981">CV</div>
+    <div><div class="name">Cirilo Vieira</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">267</div></td>
+  <td><div class="pts pts-f2">217.5</div></td>
+  <td><div class="pts pts-tot">484.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">36°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#f59e0b">PM</div>
+    <div><div class="name">Paulo Mattos</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">264</div></td>
+  <td><div class="pts pts-f2">208.5</div></td>
+  <td><div class="pts pts-tot">472.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">37°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#06b6d4">EC</div>
+    <div><div class="name">Eduardo Camelyer</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">284</div></td>
+  <td><div class="pts pts-f2">180.5</div></td>
+  <td><div class="pts pts-tot">464.5</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+<tr>
+  <td><span class="pos ">38°</span></td>
+  <td><div class="name-cell">
+    <div class="ava" style="background:#3b82f6">RP</div>
+    <div><div class="name">Rafael Pellicciotta</div></div>
+  </div></td>
+  <td><div class="pts pts-f1">254</div></td>
+  <td><div class="pts pts-f2">0.0</div></td>
+  <td><div class="pts pts-tot">254.0</div></td>
+  <td><div class="bonus-col" style="color:var(--mu)">França</div></td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>
